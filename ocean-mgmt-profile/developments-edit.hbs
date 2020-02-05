@@ -1,0 +1,575 @@
+{{#if is_admin}}
+
+<div class="flex justify-between bg-subnav w-100 ph3 pv2 pv3-ns ph4-m ph5-l">
+	<div class="f6 flex-grow">
+		<a class="link black-50 dib mr4" href="/developments" title="All Developments">All Developments</a>
+		<a class="link {{#unless data._id}}black-90{{else}}black-50{{/unless}} dib mr4" href="/developments/edit/new" title="New Development">+ New Development</a>
+	</div>
+</div>
+
+<div class="ph3 pv4 ph5-l">
+	<form class="admin-edit" action="javascript:void(0);">
+
+		<div class="cf">
+
+			<div class="fl w-100 w-50-ns pr3-ns">
+
+				<div class="cf mb4">
+
+					<div class="fl w-50 pr2">
+
+						<div class="required">
+
+							<label class="db mb2 roboto ttu b f6">Title <small class="dwa-red roboto b ml2 dib v-mid">*
+									required</small></label>
+							<input class="db w-100 pa2 f5" type="text" name="title" value="{{data.title}}" />
+
+						</div>
+
+					</div>
+					<div class="fl w-50 pl2">
+
+						<div class="required">
+							<label class="db mb2 roboto ttu b f6">Short Code <small class="dwa-red roboto b ml2 dib v-mid">*
+									required</small></label>
+							<input class="db w-100 pa2 f5" type="text" name="shortcode" value="{{data.shortcode}}" />
+						</div>
+
+					</div>
+
+				</div>
+
+				<div class="cf mb4">
+
+					<div class="fl w-50 pr2">
+
+						<label class="db mb2 roboto ttu b f6">Domain Name</label>
+						<input class="db w-100 pa2 f5" type="text" name="domain" value="{{data.domain}}" />
+
+					</div>
+					<div class="fl w-50 pl2">
+
+						<label class="db mb2 roboto ttu b f6">Appfolio Group</label>
+						<input class="db w-100 pa2 f5" type="text" name="appfolio_group" value="{{data.appfolio_group}}" />
+
+					</div>
+
+				</div>
+
+				<div class="mb4">
+					<label class="db mb2 roboto ttu b f6">Global Analytics HTML</label>
+					<textarea class="db w-100 pa2 f5 mb3 h4 lh-copy" name="analytics_html">{{data.analytics_html}}</textarea>
+				</div>
+
+				<div class="cf mb4">
+
+					<div class="fl w-50 pr2 required">
+
+						<label class="db mb2 roboto ttu b f6">Latitude</label>
+						<input class="db w-100 pa2 f5" type="text" name="latitude" value="{{data.latitude}}" />
+
+					</div>
+					<div class="fl w-50 pl2 required">
+
+						<label class="db mb2 roboto ttu b f6">Longitude</label>
+						<input class="db w-100 pa2 f5" type="text" name="longitude" value="{{data.longitude}}" />
+
+					</div>
+
+				</div>
+
+				<div class="cf mb4">
+
+					<div class="fl w-50 pr2">
+
+						<label class="db mb2 roboto ttu b f6">Address 1</label>
+						<input class="db w-100 pa2 f5" type="text" name="address_1" value="{{data.address_1}}" />
+
+					</div>
+					<div class="fl w-50 pl2">
+
+						<label class="db mb2 roboto ttu b f6">Address 2</label>
+						<input class="db w-100 pa2 f5" type="text" name="address_2" value="{{data.address_2}}" />
+
+					</div>
+
+				</div>
+
+				<div class="cf mb4">
+
+					<div class="fl w-50 pr2">
+
+						<label class="db mb2 roboto ttu b f6">City</label>
+						<input class="db w-100 pa2 f5" type="text" name="address_city" value="{{data.address_city}}" />
+
+					</div>
+					<div class="fl w-50 pl2">
+
+						<label class="db mb2 roboto ttu b f6">Zip</label>
+						<input class="db w-100 pa2 f5" type="text" name="address_zip" value="{{data.address_zip}}" />
+
+					</div>
+
+				</div>
+
+			</div>
+
+			<div class="fl w-100 w-50-ns pl3-ns cf">
+
+				<div class="cf mb4">
+					<div class="fl w-50 pr2">
+						<label class="db mb2 roboto ttu b f6">Logo</label>
+						<div class="roboto black-30 b mb2 fs80">
+							* Min 500px
+						</div>
+						<div class="roboto black-30 b mb2 fs80">
+							* JPG, PNG, GIF
+						</div>
+					</div>
+					<div class="fl w-50">
+						<!--[if lte IE 8]>
+							<small class="db red mb3 lh-copy">* Your browser doesn't support photo uploads. Please upgrade your browser to the latest version of Internet Explorer. Firefox and Google Chrome are also supported.</small>
+							<![endif]-->
+						<div class="upload-container dz-2" onclick="void(0)">
+							<div class="preview-image">
+								{{#if data.logo_medium}}
+								<img src="{{data.logo_medium}}" />
+								<div class="upload-delete" data-id="2"><img src="/images/lib/uploader/delete.svg" /></div>
+								{{/if}}
+							</div>
+							{{#unless data.logo_medium}}
+							<div class="dropzone" id="upload_2" data-id="2"></div>
+							{{/unless}}
+						</div>
+					</div>
+				</div>
+
+				<div class="mb4">
+					<label class="db mb2 roboto ttu b f6">Tagline</label>
+					<input class="db w-100 pa2 f5" type="text" name="tagline" value="{{data.tagline}}" />
+				</div>
+
+				<div class="cf">
+
+					<div class="fl w-50 pr2">
+						<label class="db mb2 roboto ttu b f6">Spotlight Image</label>
+
+						<div class="roboto black-30 b mb2 fs80">
+							* Min 500px
+						</div>
+
+						<div class="roboto black-30 b mb2 fs80">
+							* JPG, PNG, GIF
+						</div>
+
+						<div class="roboto black-30 b mb2 fs80">
+							* Visible on global about page
+						</div>
+
+					</div>
+
+					<div class="fl w-50">
+						<!--[if lte IE 8]>
+						<small class="db red mb3 lh-copy">* Your browser doesn't support photo uploads. Please upgrade your browser to the latest version of Internet Explorer. Firefox and Google Chrome are also supported.</small>
+						<![endif]-->
+
+						<div class="upload-container dz-1 mb4" onclick="void(0)">
+							<div class="preview-image">
+								{{#if data.spotlight_image_medium}}
+								<img src="{{data.spotlight_image_medium}}" />
+								<div class="upload-delete" data-id="1"><img src="/images/lib/uploader/delete.svg" /></div>
+								{{/if}}
+							</div>
+							{{#unless data.spotlight_image_medium}}
+							<div class="dropzone" id="upload_1" data-id="1"></div>
+							{{/unless}}
+						</div>
+
+					</div>
+
+				</div>
+
+				<div class="mb4">
+					<label class="db mb2 "><span class="dib roboto ttu f6 b v-mid">Global Short Description </span><small
+							class="ml2 roboto black-30 b dib v-mid">visible
+							on global about page</small></label>
+					<textarea class="db w-100 pa2 f5 mb3 h4 lh-copy"
+						name="short_description">{{data.short_description}}</textarea>
+				</div>
+
+			</div>
+
+		</div>
+
+		<div class="w-100 bw3 bt b--black-05 mb4"></div>
+
+		{{!-- // fixit demographics fields --}}
+
+		<div style="margin-left: -.5rem; margin-right: -.5rem;">
+
+			<div class="cf">
+
+				<div class="fl w-100 w-50-m w-25-l pa2">
+
+					<label class="db mb2 roboto ttu b f6">Total Leasable Footage</label>
+					<input class="db w-100 pa2 f5" type="text" name="demographics_footage"
+						value="{{data.demographics_footage}}" />
+
+				</div>
+				<div class="fl w-100 w-50-m w-25-l pa2">
+
+					<label class="db mb2 roboto ttu b f6">Number Of Spaces</label>
+					<input class="db w-100 pa2 f5" type="text" name="demographics_spaces" value="{{data.demographics_spaces}}" />
+
+				</div>
+				<div class="fl w-100 w-50-m w-25-l pa2">
+
+					<label class="db mb2 roboto ttu b f6">Year Constructed</label>
+					<input class="db w-100 pa2 f5" type="text" name="demographics_year_constructed"
+						value="{{data.demographics_year_constructed}}" />
+
+				</div>
+				<div class="fl w-100 w-50-m w-25-l pa2">
+
+					<label class="db mb2 roboto ttu b f6">Site Municipality (Proper)</label>
+					<input class="db w-100 pa2 f5" type="text" name="demographics_municipality"
+						value="{{data.demographics_municipality}}" />
+
+				</div>
+
+			</div>
+
+			<div class="cf">
+
+				<div class="fl w-100 w-50-m w-25-l pa2">
+
+					<label class="db mb2 roboto ttu b f6">Electric Provider</label>
+					<input class="db w-100 pa2 f5" type="text" name="demographics_electric"
+						value="{{data.demographics_electric}}" />
+
+				</div>
+				<div class="fl w-100 w-50-m w-25-l pa2">
+
+					<label class="db mb2 roboto ttu b f6">Gas Provider (If avail)</label>
+					<input class="db w-100 pa2 f5" type="text" name="demographics_gas" value="{{data.demographics_gas}}" />
+
+				</div>
+				<div class="fl w-100 w-50-m w-25-l pa2">
+
+					<label class="db mb2 roboto ttu b f6">Water Provider (Included/By Developer/OKC?)</label>
+					<input class="db w-100 pa2 f5" type="text" name="demographics_water" value="{{data.demographics_water}}" />
+
+				</div>
+				<div class="fl w-100 w-50-m w-25-l pa2">
+
+					<label class="db mb2 roboto ttu b f6">Communications & Data Available</label>
+					<input class="db w-100 pa2 f5" type="text" name="demographics_communications"
+						value="{{data.demographics_communications}}" />
+
+				</div>
+
+			</div>
+
+			<div class="cf">
+
+				<div class="fl w-100 w-50-m w-25-l pa2">
+
+					<label class="db mb2 roboto ttu b f6">Trash Service</label>
+					<input class="db w-100 pa2 f5" type="text" name="demographics_trash" value="{{data.demographics_trash}}" />
+
+				</div>
+				<div class="fl w-100 w-50-m w-25-l pa2">
+
+					<label class="db mb2 roboto ttu b f6">Nearest Major Interesection</label>
+					<input class="db w-100 pa2 f5" type="text" name="demographics_intersection"
+						value="{{data.demographics_intersection}}" />
+
+				</div>
+				<div class="fl w-100 w-50-m w-25-l pa2">
+
+					<label class="db mb2 roboto ttu b f6">Intersection Traffic Count</label>
+					<input class="db w-100 pa2 f5" type="text" name="demographics_traffic"
+						value="{{data.demographics_traffic}}" />
+
+				</div>
+				<div class="fl w-100 w-50-m w-25-l pa2">
+
+					<label class="db mb2 roboto ttu b f6">Nearest Post Office</label>
+					<input class="db w-100 pa2 f5" type="text" name="demographics_post_office"
+						value="{{data.demographics_post_office}}" />
+
+				</div>
+
+			</div>
+
+			<div class="cf">
+
+				<div class="fl w-100 w-50-m w-25-l pa2">
+
+					<label class="db mb2 roboto ttu b f6">School District</label>
+					<input class="db w-100 pa2 f5" type="text" name="demographics_school_district"
+						value="{{data.demographics_school_district}}" />
+
+				</div>
+				<div class="fl w-100 w-50-m w-25-l pa2">
+
+					<label class="db mb2 roboto ttu b f6">Distance To Will Rogers Airport</label>
+					<input class="db w-100 pa2 f5" type="text" name="demographics_distance_airport"
+						value="{{data.demographics_distance_airport}}" />
+
+				</div>
+				<div class="fl w-100 w-50-m w-25-l pa2">
+
+					<label class="db mb2 roboto ttu b f6">Distance To Downtown OKC</label>
+					<input class="db w-100 pa2 f5" type="text" name="demographics_distance_downtown_okc"
+						value="{{data.demographics_distance_downtown_okc}}" />
+
+				</div>
+				<div class="fl w-100 w-50-m w-25-l pa2">
+
+					<label class="db mb2 roboto ttu b f6">Distance to Downtown Edmond</label>
+					<input class="db w-100 pa2 f5" type="text" name="demographics_distance_downtown_edmond"
+						value="{{data.demographics_distance_downtown_edmond}}" />
+
+				</div>
+
+			</div>
+
+			<div class="cf">
+
+				<div class="fl w-100 w-50-m w-25-l pa2">
+
+					<label class="db mb2 roboto ttu b f6">Distance to Nichols Hills</label>
+					<input class="db w-100 pa2 f5" type="text" name="demographics_distance_nichols_hills"
+						value="{{data.demographics_distance_nichols_hills}}" />
+
+				</div>
+				<div class="fl w-100 w-50-m w-25-l pa2">
+
+				</div>
+				<div class="fl w-100 w-50-m w-25-l pa2">
+
+				</div>
+				<div class="fl w-100 w-50-m w-25-l pa2">
+
+				</div>
+
+			</div>
+
+			<div class="cf">
+
+				<div class="fl w-100 w-50-m w-25-l pa2">
+
+					<label class="db mb2 roboto ttu b f6">Approx Residences Within 2 Miles</label>
+					<input class="db w-100 pa2 f5" type="text" name="demographics_residences"
+						value="{{data.demographics_residences}}" />
+
+				</div>
+				<div class="fl w-100 w-50-m w-25-l pa2">
+
+					<label class="db mb2 roboto ttu b f6">Median Income Within Area</label>
+					<input class="db w-100 pa2 f5" type="text" name="demographics_income" value="{{data.demographics_income}}" />
+
+				</div>
+				<div class="fl w-100 w-50-m w-25-l pa2">
+
+					<label class="db mb2 roboto ttu b f6">Median Housing Rent Within Area</label>
+					<input class="db w-100 pa2 f5" type="text" name="demographics_housing_rent"
+						value="{{data.demographics_housing_rent}}" />
+
+				</div>
+				<div class="fl w-100 w-50-m w-25-l pa2">
+
+					<label class="db mb2 roboto ttu b f6">Median Population Age</label>
+					<input class="db w-100 pa2 f5" type="text" name="demographics_population_age"
+						value="{{data.demographics_population_age}}" />
+
+				</div>
+
+			</div>
+
+			<div class="cf">
+
+				<div class="fl w-100 w-50-m w-25-l pa2">
+
+					<label class="db mb2 roboto ttu b f6">Top Dining Within 2 Miles</label>
+					<textarea class="db w-100 pa2 f5 mb3 h4 lh-copy"
+						name="demographics_top_dining">{{data.demographics_top_dining}}</textarea>
+
+				</div>
+				<div class="fl w-100 w-50-m w-25-l pa2">
+
+					<label class="db mb2 roboto ttu b f6">Top Shopping Within 2 Miles</label>
+					<textarea class="db w-100 pa2 f5 mb3 h4 lh-copy"
+						name="demographics_top_shopping">{{data.demographics_top_shopping}}</textarea>
+
+				</div>
+				<div class="fl w-100 w-50-m w-25-l pa2">
+
+					<label class="db mb2 roboto ttu b f6">Top Grocers Within 2 Miles</label>
+					<textarea class="db w-100 pa2 f5 mb3 h4 lh-copy"
+						name="demographics_top_grocers">{{data.demographics_top_grocers}}</textarea>
+
+				</div>
+				<div class="fl w-100 w-50-m w-25-l pa2">
+
+					<label class="db mb2 roboto ttu b f6">Top Convenience Stores Within 2 Miles</label>
+					<textarea class="db w-100 pa2 f5 mb3 h4 lh-copy"
+						name="demographics_top_convenience">{{data.demographics_top_convenience}}</textarea>
+
+				</div>
+
+			</div>
+
+		</div>
+
+		<div class="w-100 bw3 bt b--black-05 mb4"></div>
+
+		<div class="cf">
+
+			<div class="fl w-100 w-50-ns pr3-ns">
+
+				<div class="mb4">
+					<label class="db mb2 roboto ttu b f6">Home Page: Headline</label>
+					<input class="db w-100 pa2 f5" type="text" name="home_headline" value="{{data.home_headline}}" />
+				</div>
+
+				<div class="mb4">
+					<label class="db mb2 roboto ttu b f6">Home Page: Sub-headline</label>
+					<input class="db w-100 pa2 f5" type="text" name="home_subheadline" value="{{data.home_subheadline}}" />
+				</div>
+
+			</div>
+
+			<div class="fl w-100 w-50-ns pl3-ns">
+
+				<div class="mb4">
+					<label class="db mb2 roboto ttu b f6">Home Page: Narrative</label>
+					<textarea class="db w-100 pa2 f5 mb3 h5 lh-copy"
+						name="home_narrative_description">{{data.home_narrative_description}}</textarea>
+				</div>
+
+			</div>
+		</div>
+
+		<div class="cf mb4">
+
+			<div>
+				<label class="db mb2 roboto ttu b f6">Home Page: Slideshow Images</label>
+				<div class="roboto black-30 b mb2 fs80">
+					* Min 500px
+				</div>
+				<div class="roboto black-30 b mb2 fs80">
+					* JPG, PNG, GIF
+				</div>
+				<!--[if lte IE 8]>
+		<small class="db red mb3 lh-copy">* Your browser doesn't support photo uploads. Please upgrade your browser to the latest version of Internet Explorer. Firefox and Google Chrome are also supported.</small>
+		<![endif]-->
+			</div>
+
+			<div style="margin-left: -.5rem; margin-right: -.5rem">
+				{{#each slideshow_images}}
+				<div class="fl w-third pa2">
+					<div class="upload-container dz-{{upload_order}}" onclick="void(0)">
+						<div class="preview-image">
+							{{#if image_medium}}
+							<img src="{{image_medium}}" />
+							<div class="upload-delete" data-id="{{upload_order}}"><img src="/images/lib/uploader/delete.svg" /></div>
+							{{/if}}
+						</div>
+						{{#unless image_medium}}
+						<div class="dropzone" id="upload_{{upload_order}}" data-id="{{upload_order}}"></div>
+						{{/unless}}
+					</div>
+				</div>
+				{{/each}}
+			</div>
+
+		</div>
+
+		<div class="w-100 bw3 bt b--black-05 mb4"></div>
+
+		<div class="cf">
+			<div class="fl w-100 w-50-ns pr3-ns">
+
+				<div class="mb4">
+					<label class="db mb2 roboto ttu b f6">Availabilities Page: Headline</label>
+					<input class="db w-100 pa2 f5" type="text" name="availabilities_headline"
+						value="{{data.availabilities_headline}}" />
+				</div>
+
+				<div class="mb4">
+					<label class="db mb2 roboto ttu b f6">Availabilities Page: Sub-headline</label>
+					<input class="db w-100 pa2 f5" type="text" name="availabilities_subheadline"
+						value="{{data.availabilities_subheadline}}" />
+				</div>
+
+				<div class="mb4">
+					<label class="db mb2 roboto ttu b f6">Availabilities Page: Custom HTML</label>
+					<textarea class="db w-100 pa2 f5 mb3 h4 lh-copy"
+						name="availabilities_html">{{data.availabilities_html}}</textarea>
+				</div>
+
+			</div>
+
+			<div class="fl w-100 w-50-ns pl3-ns">
+				<div class="mb4">
+					<label class="db mb2 roboto ttu b f6">Availabilities Page: Narrative</label>
+					<textarea class="db w-100 pa2 f5 mb3 h5 lh-copy"
+						name="availabilities_narrative">{{data.availabilities_narrative}}</textarea>
+				</div>
+			</div>
+		</div>
+
+		<br />
+		<br />
+
+		<div class="cf mb4">
+
+			<div>
+				<label class="db mb2 roboto ttu b f6">AVAILABILITIES PAGE: Slideshow Images</label>
+				<div class="roboto black-30 b mb2 fs80">
+					* Min 500px
+				</div>
+
+				<div class="roboto black-30 b mb2 fs80">
+					* JPG, PNG, GIF
+				</div>
+				<!--[if lte IE 8]>
+				<small class="db red mb3 lh-copy">* Your browser doesn't support photo uploads. Please upgrade your browser to the latest version of Internet Explorer. Firefox and Google Chrome are also supported.</small>
+				<![endif]-->
+			</div>
+
+			<div style="margin-left: -.5rem; margin-right: -.5rem">
+				{{#each a_slideshow_images}}
+				<div class="fl w-third pa2">
+					<div class="upload-container dz-{{upload_order}}" onclick="void(0)">
+						<div class="preview-image">
+							{{#if image_medium}}
+							<img src="{{image_medium}}" />
+							<div class="upload-delete" data-id="{{upload_order}}"><img src="/images/lib/uploader/delete.svg" /></div>
+							{{/if}}
+						</div>
+						{{#unless image_medium}}
+						<div class="dropzone" id="upload_{{upload_order}}" data-id="{{upload_order}}"></div>
+						{{/unless}}
+					</div>
+				</div>
+				{{/each}}
+			</div>
+
+		</div>
+
+		<input type="hidden" name="_id" value="{{data._id}}" />
+
+		<button rel="save" data-type="development" data-url="/developments/save" data-redirect="/developments"
+			class="dib br2 button-submit bn roboto ttu tracked b f6 mb4">Save</button>
+
+		{{#if data._id}} &nbsp;
+		<a rel="delete" class="ml2 dwa-red ttu f6 b" data-type="development" data-url="/developments/delete"
+			data-id="{{data._id}}" data-redirect="/developments">Delete</a> {{/if}}
+
+	</form>
+</div>
+
+{{/if}}

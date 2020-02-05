@@ -1,0 +1,381 @@
+
+
+/* -------------------------- map --------------------------- */
+
+#gmap a img { 
+	display:none; 
+}
+
+.labels{
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box; 
+	min-width: 100px;
+	max-width: 200px;
+	padding: 5px 6px;
+	font-size: 12px;
+	line-height: 120%;
+	color: #333;
+	background: rgba(255, 255, 255, 1);
+	box-shadow: 0 1px 3px #ddd;
+}
+.labelsvisible .labels{
+	opacity: 0;
+}
+.invisible{
+	opacity: 0;
+}
+
+#gmap.std{
+		width: 100%;
+		height: 100%;
+		position: relative;
+}
+
+#gmap.std.loading:after{
+	content: ' ';
+	display: block;
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	background: #fff url('../images/map-loader-white.gif') center center no-repeat;
+	opacity: 0.8;
+}
+
+.map-caption{
+	margin-top: 15px;
+	margin-bottom: 35px;
+	font-size: 80%;
+}
+
+#map-container{
+	width: 100%; 
+	height: 400px;
+}
+
+
+
+
+
+
+
+
+
+
+
+/* -------------------------- public profile --------------------------- */
+
+.profile-detail{
+	padding: 20px;
+}
+
+.col{
+	display: inline-block;
+	width: 49%;
+	vertical-align: text-top;
+	margin-bottom: 20px;
+}
+
+.profile-image img{
+	max-width: 100%;
+	height: auto;
+}
+
+.bio{
+	margin-bottom: 40px;
+}
+
+.credentials h3{
+	display: inline-block;
+	width: 48%;
+}
+
+.credentials{
+	margin-bottom: 40px;
+}
+
+.offerings{
+	display: inline-block;
+	width: 49%;
+	vertical-align: text-top;
+	margin-bottom: 20px;
+}
+
+.offerings ul{
+	margin-left: 0;
+	padding-left: 18px;
+}
+
+.offerings h3{
+	font-weight: bold;
+}
+
+.video-embed{
+	margin-bottom: 20px;
+}
+
+
+
+
+
+
+/* -------------------------- search results --------------------------- */
+
+
+.profiles-list{
+	padding: 10px;
+}
+
+.profiles-list iframe{
+	margin-bottom: 20px;
+}
+
+.profiles-list ul{
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	display: block;
+	margin-bottom: 25px;
+}
+
+.profiles-list ul li{
+	display: inline-block;
+	vertical-align: top;
+	width: 23%;
+	margin-bottom: 15px;
+	margin-right: 10px;
+}
+
+.profiles-list .profile-image{	
+	display: block;
+	overflow: hidden;
+	width: 155px;
+	height: auto;
+	margin-bottom: 5px;
+}
+
+
+form.search{
+	margin-bottom: 25px;
+}
+
+form.search input{
+	font-size: 15px;
+	padding: 10px;
+	width: 220px;
+	font-family: georgia;
+	color: rgba(0,0,0,0.7);
+	margin: 0;
+
+	line-height: 120%;
+	border: 1px solid #bbb;
+}
+
+form.search .reset{
+	opacity: 0.6;
+}
+form.search label{
+	display: block;
+	opacity: 0.6;
+	margin-bottom: 5px;
+}
+form.search button.submit{
+	margin-top: 20px;
+	padding: 10px 12px;
+	background: #444;
+	border: 0;
+	color: #fff;
+	opacity: 0.95;
+	font-family: georgia;
+	font-size: 100%;
+	cursor: pointer;
+}
+form.search button.submit:hover{
+	opacity: 1;
+}
+
+form.search .col{
+	margin-bottom: 0;
+}
+
+form.search .col-left{
+	width: 38%;
+}
+
+form.search .col-right{
+	width: 61%;
+}
+
+form.search .col-right select{
+	display: inline-block;
+	margin: 0 10px 10px 0;
+}
+
+.paginate{
+	text-align: right;
+	padding-right: 30px;
+	padding-bottom: 15px;
+	
+}
+
+.paginate a{
+	opacity: 0.7;
+	margin-left: 35px;
+}
+
+
+
+
+/* -------------------------- edit profile --------------------------- */
+
+.profile-edit{
+	padding: 20px;	
+}
+
+.profile-edit .details{
+	margin-bottom: 25px;
+}
+
+.profile-edit form .field{
+	margin-bottom: 35px;
+}
+
+.profile-edit form h5{
+	font-weight: bold;
+	font-size: 110%;
+	margin-bottom: 15px;
+	padding-top: 10px;
+}
+
+.profile-edit form input[type="text"], .profile-edit form textarea{
+	font-family: georgia;
+	font-size: 100%;
+	line-height: 120%;
+	padding: 5px;
+	border: 1px solid #bbb;
+	color: rgba(0,0,0,0.8);
+}
+
+.profile-edit form textarea{
+	display: block;
+	width: 450px;
+	height: 100px;
+	line-height: 150%;
+}
+
+.profile-edit form label{
+	display: block;
+	margin-bottom: 10px;
+}
+
+.profile-edit form label.inline{
+	margin-bottom: 0;
+	display: inline-block;
+}
+
+.profile-edit form .field.inline30{
+	display: inline-block;
+	width: 29%;
+}
+
+.profile-edit form input.short{
+	width: 75px;
+}
+
+ul.checklist-columns{
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+ul.checklist-columns li{
+	display: inline-block;
+	width: 32%;
+	margin: 0;
+	padding: 0;
+	margin-bottom: 5px;
+}
+
+.profile-edit .notice{
+	opacity: 0.8;
+	font-size: 90%;
+}
+
+.profile-edit form button{
+	margin-right: 20px;
+}
+
+.upload-instructions{
+	margin-top: 10px;
+	opacity: 0.8;
+}
+
+.upload-preview{
+	margin: 10px 0;
+}
+
+.upload-preview img{
+	width: 100%;
+	height: auto;
+}
+
+
+
+
+
+
+
+
+/* -------------------------- profiles misc/shared --------------------------- */
+
+h3.feedback{
+	padding: 25px;
+}
+
+.profiles-header{
+	padding: 10px;
+}
+
+.profiles-header h3{
+	font-size: 155%;
+}
+
+.profiles-header h5{
+	font-size: 120%;
+	line-height: 150%;
+	opacity: 0.6;
+}
+
+.breadcrumbs{
+	font-size: 80%;
+	opacity: 0.8;
+	font-style: italic;
+	border-bottom: 2px solid #eee;
+	padding: 8px 12px;
+}
+
+h5 small{
+	font-style: italic;
+	opacity: 0.7;
+}
+
+
+
+
+.loader-container{
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: none;
+	background: #fff url('../images/map-loader-white.gif') center center no-repeat;
+	z-index: 100;
+	opacity: 0.8;
+}
+
+body.working .loader-container{
+	display: block;
+}

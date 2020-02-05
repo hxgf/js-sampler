@@ -1,0 +1,212 @@
+<html>
+	<head>
+
+		<title>Find a Pro</title>
+
+		<link rel="stylesheet" href="./css/style-profiles.css" type="text/css" media="screen" />
+
+		<script type="text/javascript" src="./js/jquery-1.11.3.min.js"></script>
+		<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js"></script>
+		<script type="text/javascript" src="./js/handlebars.min.js"></script>
+		<script type="text/javascript" src="./js/profiles-utility.js"></script>	
+		<script type="text/javascript" src="./js/gmap3.js"></script>
+		<script type="text/javascript" src="./js/markerwithlabel.js"></script>
+
+	</head>
+	<body>
+
+
+		<div class="loader-container"></div>
+		<div id="profiles-content"></div>
+	
+		<script id="template" type="text/x-handlebars-template">
+
+
+<div class="profiles-header">
+	<h5>Use this easy search tool to find a Professional that meets your needs!</h5>
+</div>
+
+<div class="profiles-list">
+	<form class="search" action="./index.html?action=search" method="get">
+		<input type="hidden" name="action" value="search" />
+		<div class="col col-left">
+			<label>Search by name</label>
+			<input type="text" name="keyword" value="{{search.keyword}}" />
+			<button class="submit">Search</button> &nbsp;&nbsp; <small class="reset"><a href="./index.html">Start over</a></small>
+		</div>
+		<div class="col col-right">
+			<label>Or filter all Professionals to find just what you are looking for!</label>
+			<select name="types_students">
+				<option disabled {{#if search.no_types_students}}selected{{/if}}> -- Type of Students Accepted -- </option>
+				{{#each search.types_students}}
+					<option value="{{title}}" {{#if selected}}selected{{/if}}>{{title}}</option>
+				{{/each}}
+			</select>
+			<select name="types_lessons">
+				<option disabled {{#if search.no_types_lessons}}selected{{/if}}> -- Types of Lessons Provided -- </option>
+				{{#each search.types_lessons}}
+					<option value="{{title}}" {{#if selected}}selected{{/if}}>{{title}}</option>
+				{{/each}}
+			</select>
+			<select name="location_state">
+				<option disabled {{#if search.no_location_state}}selected{{/if}}> -- State -- </option>
+				{{#each search.location_state}}
+				<option value="{{title}}" {{#if selected}}selected{{/if}}>{{title}}</option>
+				{{/each}}
+			</select>
+			<select name="location_country">
+				<option disabled {{#if search.no_location_country}}selected{{/if}}> -- Country -- </option>
+				{{#each search.location_country}}
+				<option value="{{title}}" {{#if selected}}selected{{/if}}>{{title}}</option>
+				{{/each}}
+			</select>
+			<select name="professional_services">
+				<option disabled {{#if search.no_professional_services}}selected{{/if}}> -- Professional Services Offered -- </option>
+				{{#each search.professional_services}}
+				<option value="{{title}}" {{#if selected}}selected{{/if}}>{{title}}</option>
+				{{/each}}
+			</select>
+		</div>
+	</form>
+
+	<div id="map-container">
+		<div id="gmap" data-id="home" class="std loading map-home"></div>
+	</div>
+
+	<div class="map-caption"><small>Locations are provided for your convenience and may change as addresses and geolocation services are updated around the world.<br /> Always call or email a Professional for alternative meeting locations or driving directions first.</small></div>
+
+	{{#if profiles}}
+	<ul>
+		{{#each profiles}}
+		<li>
+			<div class="profile-image">
+				<a href="./profile.html?name={{url_title}}"><img src="{{#if photo}}{{photo}}{{else}}./images/profiles-placeholder.png{{/if}}" /></a>
+			</div>
+			<h3><a href="./profile.html?name={{url_title}}">{{name}}</a></h3>
+			{{#if alt_address}}
+				{{#if alt_country_name}}
+					<h5>{{alt_city}}, {{alt_country_name}}</h5>
+				{{else}}					
+					<h5>{{alt_city}}, {{alt_state}}</h5>
+				{{/if}}
+			{{else}}
+				{{#is country_code "==" "US"}}
+					<h5>{{city}}, {{state}}</h5>
+				{{else}}
+					<h5>{{city}}, {{country_name}}</h5>
+				{{/is}}
+			{{/if}}
+		</li>
+		{{/each}}
+	</ul>
+	{{else}}
+	<h3 class="feedback">No profiles found.</h3>
+	{{/if}}
+
+	{{#if pagination_links}}
+	<div class="paginate">
+		<div>
+			{{#if pagination_links.prev}}
+				<a href="{{pagination_links.prev}}"><span>&#8592;</span> Previous</a>
+			{{/if}}
+			{{#if pagination_links.next}}
+				<a href="{{pagination_links.next}}">Next <span>&#8594;</span></a>
+			{{/if}}
+		</div>
+	</div>
+	{{/if}}
+
+</div>
+
+		</script>
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+	// show "working" state by default
+	$("body").addClass("working");
+
+	// parse the query string
+	var query_string = utility.query_string();
+
+	var data = {};
+
+
+	// determing which type of profile
+	data.profile_type = 'professional'; // professional, judge
+
+	// determine which parameters to send to the api
+	if (query_string['action']){
+		data.action = query_string['action'];
+	}
+	if (query_string['keyword']){
+		data.keyword = query_string['keyword'];
+	}
+	if (query_string['types_lessons']){
+		data.types_lessons = query_string['types_lessons'];
+	}
+	if (query_string['types_students']){
+		data.types_students = query_string['types_students'];
+	}
+	if (query_string['professional_services']){
+		data.professional_services = query_string['professional_services'];
+	}
+	if (query_string['location_state']){
+		data.location_state = query_string['location_state'];
+	}
+	if (query_string['location_country']){
+		data.location_country = query_string['location_country'];
+	}
+
+	
+	// fetch data from api
+  utility.api_request({
+    endpoint: 'search',
+    data: data,
+    callback: function(api_data){
+
+			// render the template			
+			utility.render_template("#template", api_data);
+			
+			// determine where to place map coordinates
+			var coords = [];		
+			api_data['profiles'].forEach(function (marker) {
+				if (marker.lat && marker.lon){
+					coords.push({
+						latLng: [marker.lat, marker.lon],
+						data: 'profile.html?name=' + marker.url_title,
+						options: {		
+						  labelAnchor: new google.maps.Point(-23, 33),
+						  labelClass: "labels",
+						  labelContent: marker.name,
+						  labelVisible: false
+						}  
+					});		
+				}
+			});
+			
+			// render the map
+			utility.show_map(coords, [38.826497,-98.489940], 4);
+
+			// remove "working" state
+			$("body").removeClass("working");
+
+    }
+  });
+
+
+</script>
+
+
+
+	</body>
+</html>

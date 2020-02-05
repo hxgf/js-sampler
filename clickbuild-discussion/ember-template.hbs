@@ -1,0 +1,618 @@
+<div class="project-title">
+  {{#if model.project_info}}<h2>{{model.project_info}}</h2>{{/if}}
+</div>
+
+
+<div class="task-communication-container">
+
+  <form id="discussion-edit" class="ui form pe-block" action="javascript:void(0);">
+
+    {{#if model.new}}
+
+    {{else}}
+
+
+    <div class="task-op-data">
+      <h2>
+        {{#if model.template_task.icon_url}}
+          <img {{bind-attr src=model.template_task.icon_url}} class="discussion-title-icon" />
+        {{/if}}
+        {{model.title}}
+        {{#if model.template_task}}
+          {{#if jch_staff}}{{#if model.template_task._id}} {{#link-to 'edit.task' model.template_task._id}}<i class="fas fa-cog o-30 f5 relative ml1" style="top: -0.3rem;"></i>{{/link-to}}{{/if}}{{/if}}
+        {{/if}}
+
+        {{#if model.can_view_edit}}
+          {{#if model.task_edit_href}}
+          <small class="edit-link"><a {{bind-attr href=model.task_edit_href}}><i class="edit icon"></i> Edit Task</a></small>
+          {{/if}}
+        {{/if}}
+
+      </h2>
+
+
+
+      <div class="ui left floated basic segment" style="padding: 0;">
+        {{#if jch_staff}}
+          {{#if model.project_url_warranty}}
+            <h3><a {{bind-attr href=model.project_url_warranty}}>&larr;&nbsp; Back to Warranty</a></h3>
+          {{else}}
+            {{#if model.project_info}}<h3><a {{bind-attr href=model.project_url_progress}}>&larr;&nbsp; Back to Progress</a></h3>{{/if}}
+          {{/if}}
+
+          <div class="like-comment">Client Feed:&nbsp;
+            {{model.feed_likes_total}} Likes &nbsp;|&nbsp;
+            {{#link-to 'client-feed' model.feed_id}}{{model.feed_comments_total}} Comments{{/link-to}}
+          </div>
+
+          <small>
+            <a {{bind-attr href=model.print_link_latest}}><i class="ui print icon"></i> Print Last Post</a>
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <a {{bind-attr href=model.print_link_thread}}><i class="ui print icon"></i> Print Complete Thread</a>
+              {{#if model.service_order_url}}
+              <br /> <a {{bind-attr href=model.service_order_url}}><i class="ui print icon"></i> Print Service Order</a>
+              {{/if}}
+          </small>
+
+        {{else}}
+
+          {{#if model.project_info}}<h3><a {{bind-attr href=model.project_url_communication}}>&larr;&nbsp; Back to Communication</a></h3>{{/if}}
+
+        {{/if}}
+
+        {{#if model.assigned_trade}}
+          <div class="mt2">
+            Assigned Trade: <b>{{model.assigned_trade}}</b>
+          </div>
+          {{#if model.show_boilerplate_button}}
+            <span id="button-boilerplate" class="dib br1 pa2 bg-black-50 f6 white mt2 mb3 b pointer" {{action 'task_boilerplate' model.task.trade_id model.task.template_task_id}}>Send Default Message</span>
+          {{/if}}
+        {{/if}}
+
+      </div>
+
+      <div class="ui right floated basic segment" style="padding: 0;">
+        {{#if jch_staff}}
+          {{#link-to 'incomplete.task' model.task.template_task_id}}<i class="ui list icon"></i>&nbsp; See Incomplete on all projects{{/link-to}}<br /><br />
+
+          <label>Go to this task on:</label><br />
+          <select {{action 'project_wormhole' on="change"}} class="project-wormhole" name="source">
+            <option value=""></option>
+            {{#each model.wormhole_list}}
+            <option {{bind-attr value=id}} {{bind-attr selected=selected}}>{{title}}</option>
+            {{/each}}
+          </select>
+
+          <br />
+          <label>Move to:</label><br />
+          <select {{action 'phase_move' on="change"}} class="phase-move" name="phase_source">
+            <option value=""></option>
+            {{#each model.phase_move_list}}
+            <option {{bind-attr value=_id}} {{bind-attr selected=selected}}>{{title}}</option>
+            {{/each}}
+          </select>
+
+        {{/if}}
+
+      </div>
+
+      <div class="ui clearing divider"></div>
+
+    </div>
+
+    <div class="bg-near-black pa3 white mb4 cf">
+      <div class="fl lh-copy f4">
+        <div><span class="dib w4">Address:</span> <span class="fw7">{{model.data_project.title}}</span></div>
+        <div><span class="dib w4">Community:</span> <span class="fw7">{{model.data_project.community}}</span></div>
+        <div><span class="dib w4">Permit No:</span> <span class="fw7">{{model.data_project.permit_no}}</span></div>
+      </div>
+      <div class="fr tr pt2 f6 pr1">
+        <a class="br1 dib pa3 bg-near-white near-black fw7 no-underline" {{bind-attr href=model.data_project.map_url}}
+          target="_blank"><i class="fas fa-map-marker-alt mr1"></i> Map Link</a>
+        <a class="br1 dib pa3 bg-near-white near-black fw7 no-underline ml3"
+          {{bind-attr href=model.project_url_files}}><i class="fas fa-folder-open mr1"></i> Project Files</a>
+      </div>
+    </div>
+
+
+  {{#if jch_staff}}
+
+    {{#if model.branch_master}}
+
+      <div>
+        <h4 class="ui black block header"><i class="ui browser icon"></i> Task Status</h4>
+        <div class="pb3 branch-task-schedule" style="margin-left: 48px;">
+          <div class="ui three column relaxed grid">
+            <div class="column">
+              <div>
+                <label {{bind-attr class=":pointer model.branch_task_schedule.label_class"}}
+                  {{bind-attr data-branch-task-id=model.branch_task_schedule._id}}><input type="checkbox"
+                    {{action 'branch_task_complete' model.branch_task_schedule._id on="change"}}
+                    {{bind-attr checked=model.branch_task_schedule.checked}} /> <span style="margin-top: -0.15rem;"
+                    class="dib lh-copy f6 b w-70 ml1">{{model.branch_task_schedule.title}}</span></label>
+              </div>
+            </div>
+            <div class="column">
+              <label {{bind-attr class=":pointer model.branch_task_start.label_class"}}
+                {{bind-attr data-branch-task-id=model.branch_task_start._id}}><input type="checkbox"
+                  {{action 'branch_task_complete' model.branch_task_start._id on="change"}}
+                  {{bind-attr checked=model.branch_task_start.checked}} /> <span style="margin-top: -0.15rem;"
+                  class="dib lh-copy f6 b w-70 ml1">{{model.branch_task_start.title}}</span></label>
+              <input type="hidden" name="branch_start_id" {{bind-attr value=model.branch_task_start._id}} />
+
+              <div class="cf mt3">
+                <div class="fl w-50">
+                  <div class="field">
+                    <label>Date</label>
+                    {{input type="text" class="input-bb datepicker" name="schedule_date_branch_start" value=model.branch_task_start.schedule_date_format}}
+                  </div>
+                </div>
+                <div class="fl w-50 pl2">
+                  <div class="field">
+                    <label>Time</label>
+                    {{input type="text" class="input-bb" name="schedule_time_branch_start" value=model.branch_task_start.schedule_time}}
+                  </div>
+                </div>
+              </div>
+
+              <div class="branch-task-schedule-save dn">
+                <a class="f6 link dim pointer br-pill ph3 pv2 mb2 dib bn bg-near-black white"
+                  {{action 'save_branch_schedule'}}>Save Branch Scheduling</a>
+              </div>
+
+            </div>
+            <div class="column">
+              <label {{bind-attr class=":pointer model.branch_task_complete.label_class"}}
+                {{bind-attr data-branch-task-id=model.branch_task_complete._id}}><input type="checkbox"
+                  {{action 'branch_task_complete' model.branch_task_complete._id on="change"}}
+                  {{bind-attr checked=model.branch_task_complete.checked}} /> <span style="margin-top: -0.15rem;"
+                  class="dib lh-copy f6 b w-70 ml1">{{model.branch_task_complete.title}}</span></label>
+              <input type="hidden" name="branch_complete_id" {{bind-attr value=model.branch_task_complete._id}} />
+
+              <div class="cf mt3">
+                <div class="fl w-50">
+                  <div class="field">
+                    <label>Date</label>
+                    {{input type="text" class="input-bb datepicker" name="schedule_date_branch_complete" value=model.branch_task_complete.schedule_date_format}}
+                  </div>
+                </div>
+                <div class="fl w-50 pl2">
+                  <div class="field">
+                    <label>Time</label>
+                    {{input type="text" class="input-bb" name="schedule_time_branch_complete" value=model.branch_task_complete.schedule_time}}
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+
+    {{else}}
+
+
+    <div {{bind-attr class=":task-status-title model.task_class"}}>
+      <h4 class="ui black block header"><i class="ui browser icon"></i> Task Status</h4>
+      <div class="task-status-control">
+        <input type="checkbox" {{action 'task_complete' model.task_id on="change"}} id="task-status"
+          {{bind-attr checked=model.task_status}} /> <label for="task-status">{{model.task_label}}</label>
+      </div>
+    </div>
+
+    {{/if}}
+
+
+  {{/if}}
+
+
+
+    <div class="task-schedule-title">
+      {{#if jch_staff}}
+      <h4 class="ui black block header expander-link" {{action 'schedule_toggle'}}><i class="ui calendar icon"></i>
+        Event Schedule</h4>
+      <input type="hidden" name="jch_staff" value="staff" />
+      {{else}}
+      <h4 class="ui black block header"><i class="ui calendar icon"></i> Event Schedule</h4>
+      {{/if}}
+      <div class="edit-scheduled">
+        {{#if model.date_scheduled_format}}
+        <h4 class="discussion-feedback">Scheduled for {{model.date_scheduled_string}}</h4>
+        {{#if model.data_event.description}}<h5 class="discussion-feedback description"><b>NOTE:</b>
+          {{model.data_event.description}}</h5>{{/if}}
+        {{else}}
+        <h4 class="discussion-feedback">Not Yet Scheduled</h4>
+        {{/if}}
+      </div>
+      <div class="edit-schedule ui stacked segment">
+        <div class="ui two column relaxed grid">
+          <div class="column">
+            <div class="field">
+              <label>Date &nbsp; <small>mm/dd/yyyy</small></label>
+              {{input type="text" class="input-bb datepicker" name="date_scheduled" value=model.date_scheduled_format}}
+            </div>
+            <div class="field">
+              <label>Time</label>
+              <div class="ui two column grid">
+                <div class="column">
+                  <label><input type="radio" name="time_scheduled" value="morning"
+                      {{bind-attr checked=model.checked_morning}} /> &nbsp; Morning</label><br />
+                  <label><input type="radio" name="time_scheduled" value="afternoon"
+                      {{bind-attr checked=model.checked_afternoon}} /> &nbsp; Afternoon</label>
+                </div>
+                <div class="column">
+                  <label><input type="radio" name="time_scheduled" value="eob"
+                      {{bind-attr checked=model.checked_eob}} /> &nbsp; By End of Business</label><br />
+                  <input type="radio" name="time_scheduled" value="specific"
+                    {{bind-attr checked=model.checked_specific}} /> &nbsp;
+                  {{input type="text" class="input-bb" name="time_specific" value=model.data_event.time_specific placeholder="2:00pm"}}
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="column">
+            <div class="field">
+              <label>Event Notes</label>
+              {{textarea id="description" class="textarea" name="description" value=model.data_event.description}}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <h4 class="ui black block header"><i class="ui comment icon"></i> Discussion</h4>
+
+    {{#unless model.comment_latest}}
+    <h4 class="discussion-feedback">No Discussion Yet...</h4>
+    {{/unless}}
+
+
+    {{#if model.comment_latest}}
+    <a id="latest"></a>
+
+    <div class="task-communication">
+      <div class="thumbnail">
+        {{#if model.comment_latest.user.company_id}}
+        <span class="tip" {{bind-attr data-tip=model.comment_latest.user.tooltip}}>
+          <a {{bind-attr href=model.comment_latest.user_href}}>
+            {{#if model.comment_latest.user.thumbnail_url}}<img
+              {{bind-attr src=model.comment_latest.user.thumbnail_url}} />
+            {{else}}
+            <img src="//s3.amazonaws.com/clickbuild/images/thumbnail-default-user.png" />
+            {{/if}}
+        </span>
+        {{else}}
+        <img src="//s3.amazonaws.com/clickbuild/images/thumbnail-default-user.png" />
+        {{/if}}
+      </div>
+      <div class="body">
+        <div class="meta">
+          {{#if model.comment_latest.user.company_id}}
+          <span class="tip" {{bind-attr data-tip=model.comment_latest.user.tooltip}}><a
+              {{bind-attr href=model.comment_latest.user_href}}>{{model.comment_latest.user.first_name}}
+              {{model.comment_latest.user.last_name}}{{#if model.comment_latest.user.nickname}}
+              ({{model.comment_latest.user.nickname}}){{/if}}</a></span>
+          {{else}}
+          <span class="b f6 o-80">{{model.comment_latest.user.first_name}}
+            {{model.comment_latest.user.last_name}}</span>
+          {{/if}}
+          <small> | &nbsp; {{model.comment_latest.date}} {{#if model.comment_latest.recipient_string}} &nbsp; | &nbsp;
+            Sent to: {{model.comment_latest.recipient_string}}{{/if}}{{#if model.comment_latest.seen_by}} &nbsp; |
+            &nbsp; Seen by: {{#each model.comment_latest.seen_by}}{{#unless first}}, {{/unless}}{{{icon}}}
+            {{name}}{{/each}}{{/if}}</small>
+        </div>
+        <pre class="text">{{{model.comment_latest.body}}}</pre>
+        {{#if model.comment_latest.files}}
+        <ul class="files-list discussion-files">
+          {{#each model.comment_latest.files}}
+          <li>
+            {{#if show_image}}
+            <a {{bind-attr href=image_url}} data-fancybox="gallery"><img {{bind-attr src=image_url}}
+                style="float: none" /></a>
+            <div class="mt2">{{title}}</div>
+            {{else}}
+            <a {{bind-attr href=file_url}} target="_blank"><img
+                src="//s3.amazonaws.com/clickbuild/images/cb1/icon-files-generic.png" /></a>
+            <span class="file-details">
+              <a {{bind-attr href=file_url}} class="title" target="_blank">{{title}}</a>
+              <span class="filename">{{filename}}</span>
+            </span>
+            {{/if}}
+          </li>
+          {{/each}}
+        </ul>
+        {{/if}}
+      </div>
+    </div>
+
+
+    {{/if}}
+
+
+
+
+    <a id="respond"></a>
+    <div class="field">
+      {{textarea class="textarea" name="body"}}
+    </div>
+
+
+
+
+    <div class="dib v-top mr4">
+      <h4>JCH Staff to include:</h4>
+      <ul class="checkbox-list-alt staff-recipients">
+        {{#each model.recipients_jch}}
+        <li {{bind-attr class="super_active_class super_inactive_class jeff_class"}}>
+          <div class="discussion-recipient-title"><span class="tip" {{bind-attr data-tip=user.tooltip}}><span
+                class="name">{{name}}</span></span></div>
+          <label><input type="checkbox" {{bind-attr value=user_id}} {{bind-attr data-firstname=first_name}}
+              {{bind-attr checked=checked_email}} name="recipients[]" />Email</label>
+          {{#if show_mobile}} &nbsp;&nbsp; <label><input type="checkbox" {{bind-attr value=user_id}}
+              {{bind-attr checked=checked_mobile}} name="recipients_mobile[]" />Mobile</label>{{/if}}
+        </li>
+        {{/each}}
+      </ul>
+    </div>
+
+
+    {{#if model.recipients_default}}
+    <div class="dib v-top mr4">
+      <h4>Included By Default:</h4>
+      <ul class="checkbox-list-alt issue-recipient-list check-unique">
+        {{#each model.recipients_default}}
+        <li>
+          <div class="discussion-recipient-title"><span class="tip" {{bind-attr data-tip=user.tooltip}}><span
+                class="name">{{name}}{{#if jch_staff}} {{#link-to 'edit.users' user_id}}<i
+                  class="fas fa-cog ml1 o-30 f6"></i>{{/link-to}}{{/if}}</span></span></div>
+          <label><input type="checkbox" {{bind-attr value=user_id}} {{bind-attr checked=checked_email}}
+              name="recipients[]" />Email</label>
+          {{#if show_mobile}} &nbsp;&nbsp; <label><input type="checkbox" {{bind-attr value=user_id}}
+              {{bind-attr checked=checked_mobile}} name="recipients_mobile[]" />Mobile</label>{{/if}}
+          <div class="discussion-recipient-meta"><span class="company">{{company_name}}</span><span
+              class="category">{{category_name}}</span></div>
+        </li>
+        {{/each}}
+      </ul>
+    </div>
+    {{/if}}
+
+
+    {{#if model.recipients_previous}}
+    <div class="dib v-top ml5">
+      <h4>Previously Included:</h4>
+      <ul class="checkbox-list-alt issue-recipient-list check-unique">
+        {{#each model.recipients_previous}}
+        <li>
+          <div class="discussion-recipient-title"><span class="tip" {{bind-attr data-tip=user.tooltip}}><span
+                class="name">{{name}}{{#if jch_staff}} {{#link-to 'edit.users' user_id}}<i
+                  class="fas fa-cog ml1 o-30 f6"></i>{{/link-to}}{{/if}}</span></span></div>
+          <label><input type="checkbox" {{bind-attr value=user_id}} {{bind-attr checked=checked_email}}
+              name="recipients[]" />Email</label>
+          {{#if show_mobile}} &nbsp;&nbsp; <label><input type="checkbox" {{bind-attr value=user_id}}
+              {{bind-attr checked=checked_mobile}} name="recipients_mobile[]" />Mobile</label>{{/if}}
+          <div class="discussion-recipient-meta"><span class="company">{{company_name}}</span><span
+              class="category">{{category_name}}</span></div>
+        </li>
+        {{/each}}
+      </ul>
+    </div>
+    {{/if}}
+
+
+
+    <h4>Trade Staff to include:</h4>
+    <div class="h5 overflow-y-scroll bg-near-white pa2">
+      {{#each model.recipients_companies}}
+      <h5 class="ui black block header expander-link relative">{{title}} <span class="category"> &nbsp; | &nbsp;
+          {{category}}</span>
+
+        {{#if jch_staff}} <div class="dib tr absolute right-1">{{#link-to 'trade.communication' company_id}}<i
+            class="fas fa-cog ml1 o-30 f6"></i>{{/link-to}}</div>{{/if}}
+
+      </h5>
+      <div class="recipient-list-container">
+        <ul class="checkbox-list-alt check-unique">
+          {{#each staff}}
+          <li class="mr4">
+            <div class="discussion-recipient-title"><span class="tip" {{bind-attr data-tip=user.tooltip}}><span
+                  class="name">{{name}}{{#if jch_staff}} {{#link-to 'edit.users' user_id}}<i
+                    class="fas fa-cog ml1 o-30 f6"></i>{{/link-to}}{{/if}}</span></span></div>
+            <label><input type="checkbox" {{bind-attr value=user_id}} {{bind-attr checked=checked_email}}
+                name="recipients[]" />Email</label>
+            {{#if show_mobile}} &nbsp;&nbsp; <label><input type="checkbox" {{bind-attr value=user_id}}
+                {{bind-attr checked=checked_mobile}} name="recipients_mobile[]" />Mobile</label>{{/if}}
+          </li>
+          {{/each}}
+        </ul>
+      </div>
+    </div>
+    {{/each}}
+</div>
+
+
+
+<div class="field discussion-upload">
+  <button {{action 'upload'}} class="modal-upload-button"><i class="attachment icon"></i> Attach Files</button>
+
+  <div class="modal-upload">
+    <div class="upload-container">
+      <div class="dropzone file-replace" id="filesreplace"></div>
+      <div class="upload-button needsclick"></div>
+    </div>
+
+    {{#if jch_staff}}
+    <label class="db mt3 i">
+
+      <input type="checkbox" name="add_to_project_files" />
+
+      Add this file to this project's files in the&nbsp;
+
+      <select name="add_to_project_files_category">
+        {{#each model.files_categories}}
+        <option {{bind-attr value=_id}}>{{title}}</option>
+        {{/each}}
+      </select>
+
+      category.
+
+    </label>
+
+
+    {{/if}}
+
+  </div>
+</div>
+
+
+<div class="attach-project-files mb4">
+  {{#if jch_staff}}
+  <button {{action 'attach_project_files'}} class="modal-upload-button"><i class="archive icon"></i> Attach Project
+    Files</button>
+  <div class="attach-project-files-container">
+    <select multiple class="multiple" name="attach_project_files[]">
+      {{#each model.project_files_categories}}
+      <optgroup {{bind-attr label=title}}>
+        {{#each project_files}}
+        <option {{bind-attr value=file_id}} {{bind-attr selected=selected}}>{{title}}</option>
+        {{/each}}
+      </optgroup>
+      {{/each}}
+    </select>
+  </div>
+  {{/if}}
+
+
+</div>
+
+
+
+
+
+<div class="mb4">
+
+  <input type="hidden" name="task_id" {{bind-attr value=model.task_id}} />
+  <button id="update-button" {{action 'save' model.id model.project_id}}>Update Discussion</button>
+
+  {{#if model.watch_list}}
+  <input type="hidden" name="watch_list" value="true" />
+  {{else}}
+  <input type="hidden" name="watch_list" value="false" />
+  {{/if}}
+  &nbsp;&nbsp;&nbsp;
+  <a id="watch-list-link" {{action 'watch_list' model.id}}>{{#if model.watch_list}}<i
+      class="remove sign icon"></i>Remove
+    from my watch list{{else}}<i class="add sign icon"></i>Add to my watch list{{/if}}</a>
+  {{#if jch_staff}}
+  <div class="f6 i mt4">
+    <input type="checkbox" name="snooze_flag" id="snooze-flag" />&nbsp; <label for="snooze-flag">Delay notification
+      until
+      next business day (7am)</label>
+  </div>
+  {{/if}}
+
+</div>
+
+
+
+
+
+
+
+
+{{#each model.comments}}
+
+<div class="task-communication">
+  <div class="thumbnail">
+    {{#if user.company_id}}
+    <span class="tip" {{bind-attr data-tip=user.tooltip}}>
+      <a {{bind-attr href=user_href}}>{{#if user.thumbnail_url}}<img {{bind-attr src=user.thumbnail_url}} />
+        {{else}}
+        <img src="//s3.amazonaws.com/clickbuild/images/thumbnail-default-user.png" />
+        {{/if}}</a>
+    </span>
+    {{else}}
+    <img src="//s3.amazonaws.com/clickbuild/images/thumbnail-default-user.png" />
+    {{/if}}
+  </div>
+  <div class="body">
+    <div class="meta">
+      {{#if user.company_id}}
+      <span class="tip" {{bind-attr data-tip=user.tooltip}}><a {{bind-attr href=user_href}}>{{user.first_name}}
+          {{user.last_name}}{{#if user.nickname}} ({{user.nickname}}){{/if}}</a></span>
+      {{else}}
+      <span class="b f6 o-80">{{user.first_name}} {{user.last_name}}</span>
+      {{/if}}
+      <small> | &nbsp; {{date}} {{#if recipient_string}} &nbsp; | &nbsp; Sent to: {{recipient_string}}{{/if}}
+        {{#if seen_by}} &nbsp; | &nbsp; Seen by: {{#each seen_by}}{{#unless first}}, {{/unless}}{{{icon}}}
+        {{name}}{{/each}}{{/if}}
+      </small>
+    </div>
+    <pre class="text">{{{body}}}</pre>
+
+    {{#if files}}
+    <ul class="files-list discussion-files">
+      {{#each files}}
+      <li>
+        {{#if show_image}}
+        <a {{bind-attr href=image_url}} data-fancybox="gallery"><img {{bind-attr src=image_url}} /></a>
+        {{else}}
+        <a {{bind-attr href=file_url}} target="_blank"><img
+            src="//s3.amazonaws.com/clickbuild/images/cb1/icon-files-generic.png" /></a>
+        <span class="file-details">
+          <a {{bind-attr href=file_url}} class="title" target="_blank">{{title}}</a>
+          <span class="filename">{{filename}}</span>
+        </span>
+        {{/if}}
+      </li>
+      {{/each}}
+    </ul>
+    {{/if}}
+  </div>
+</div>
+{{/each}}
+
+
+
+
+{{/if}}
+
+
+
+<div class="task-communication op">
+</div>
+
+
+
+
+{{#if model.new}}
+<div class="ui two column relaxed grid">
+  <div class="column">
+    <div class="field">
+      <label>Title</label>
+      {{input type="text" name="title" value=data.title}}
+    </div>
+  </div>
+  <div class="column">
+    <div class="field">
+      <label>Associated Project</label>
+      <select name="project_id">
+        <option value=""></option>
+        {{#each projects}}
+        <option {{bind-attr value=id}} {{bind-attr selected=selected}}>{{title}}</option>
+        {{/each}}
+      </select>
+    </div>
+  </div>
+</div>
+{{/if}}
+
+
+
+  </form>
+
+
+</div>

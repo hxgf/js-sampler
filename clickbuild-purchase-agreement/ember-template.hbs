@@ -1,0 +1,381 @@
+{{#if model.can_view}}
+
+<h3 class="ui header">Purchase Agreement</h3>
+
+<form id="client-pa" class="ui form pe-block">
+
+
+
+  <div class="ui three column grid">
+
+    <div class="column">
+      <div class="field">
+        <label>Property Address</label>
+        <b>{{model.pa.address}}<br />
+          {{model.pa.city}}, {{model.pa.state}} {{model.pa.zip}}
+        </b>
+      </div>
+    </div>
+
+    <div class="column">
+      <div class="field">
+        <label>Buyer 1</label>
+        <b>{{model.pa.buyer_1}}</b>
+      </div>
+    </div>
+
+    <div class="column">
+      <div class="field">
+        <label>Buyer 2</label>
+        <b>{{model.pa.buyer_2}}</b>
+      </div>
+    </div>
+
+  </div>
+
+
+  <div class="ui six column grid">
+    <div class="column">
+      <div class="field">
+        <label>Contract Date</label> <b>{{model.pa.contract_date}}</b>
+      </div>
+    </div>
+    <div class="column">
+      <div class="field">
+        <label>County</label> <b>{{model.pa.county}}</b>
+      </div>
+    </div>
+    <div class="column">
+      <div class="field">
+        <label>Community</label> <b>{{model.pa.addition}}</b>
+      </div>
+    </div>
+    <div class="column">
+      <div class="field">
+        <label>Lot</label> <b>{{model.pa.lot}}</b>
+      </div>
+    </div>
+    <div class="column">
+      <div class="field">
+        <label>Block</label> <b>{{model.pa.block}}</b>
+      </div>
+    </div>
+    <div class="column">
+      <div class="field">
+      </div>
+    </div>
+
+  </div>
+
+
+
+  <div class="ui three column grid">
+
+    <div class="column">
+      <div class="field">
+        <label>Seller Entity</label>
+        {{input type="text" name="pa_seller_entity" value=model.pa.seller_entity}}
+      </div>
+
+      <div class="field">
+        <label>Buyer Broker's Name</label>
+        {{input type="text" name="pa_broker_buyer_name" disabled="disabled" value=model.pa.broker_buyer_name}}
+      </div>
+      <div class="field">
+        <label>Buyer Broker Commission <small>($)</small></label>
+        {{input type="text" name="pa_broker_buyer_commission" value=model.pa.broker_buyer_commission}}
+      </div>
+      <div class="field">
+        <label>Acceptance Date <small>mm/dd/yyyy</small></label>
+        {{input type="text" name="pa_acceptance_date" class="datepicker" value=model.pa.acceptance_date}}
+      </div>
+    </div>
+    <div class="column">
+      <div class="field">
+        <label>Down Payment <small>($)</small></label>
+        {{input type="text" name="pa_down_payment" value=model.pa.down_payment}}
+      </div>
+      <div class="field">
+        <label>Builder Broker's Name</label>
+        {{input type="text" name="pa_broker_builder_name" value=model.pa.broker_builder_name}}
+      </div>
+      <div class="field">
+        <label>Builder Broker Commission <small>($)</small></label>
+        {{input type="text" name="pa_broker_builder_commission" value=model.pa.broker_builder_commission}}
+      </div>
+      <div class="field">
+        <label>Acceptance Time</label>
+        {{input type="text" name="pa_acceptance_time" value=model.pa.acceptance_time}}
+      </div>
+    </div>
+
+    <div class="column">
+
+
+
+
+    </div>
+  </div>
+
+  <div class="ui grid pa-special-provisions">
+    <div class="eleven wide column">
+      <div class="field">
+        <label>Special Provisions</label>
+        {{textarea class="textarea" name="pa_special_provisions" value=model.pa.special_provisions}}
+      </div>
+    </div>
+  </div>
+
+  <button id="save-pa" {{action 'pa_generate' model.project_id}}>Generate Purchase Agreement</button>
+  &nbsp;&nbsp;&nbsp; <a class="form-text-link" id="download_pa" href="" style="display: none;" target="_blank">Download
+    PDF: <span></span></a>
+
+
+
+</form>
+
+
+<div class="ui section divider"></div>
+
+{{/if}}
+
+<h3 class="ui header">Client Links</h3>
+
+<div class="pv2">
+
+
+  <a class="f5 link dim pointer dib mid-gray mr4" {{bind-attr href=model.link_client_doc}} target="_blank"><i
+      class="fas fa-external-link-alt"></i> <span class="underline">FAQ Summary Doc</span></a>
+
+  <a class="f5 link dim pointer dib mid-gray mr4" {{bind-attr href=model.portal_link_appraiser}} target="_blank"><i
+      class="fas fa-external-link-alt"></i> <span class="underline">Appraisal Assistance Portal</span></a>
+
+</div>
+<div class="ui section divider"></div>
+
+
+
+
+<form id="client-edit" class="ui form pe-block">
+
+  <h3 class="ui header">Client Data</h3>
+
+  <div class="clients-list ui two column relaxed grid">
+
+
+    <div class="client-info column">
+      <div class="ui raised blue segment">
+
+        {{input type="hidden" name="id" value=model.client_data.id}}
+
+        <div class="ui two column relaxed grid">
+
+          <div class="column">
+            <div class="field">
+              <label>First Name</label>
+              {{input type="text" name="first_name" value=model.client_data.first_name}}
+            </div>
+            <div class="field">
+              <label>D.O.B.</label>
+              {{input type="text" name="date_birth" value=model.client_data.date_birth_format}}
+            </div>
+            <div class="field">
+              <label>Email</label>
+              {{input type="text" name="email" value=model.client_data.email}}
+            </div>
+
+            <div class="field client-address">
+              <label>Current Street Address</label>
+              {{input type="text" name="address" value=model.client_data.address}}
+            </div>
+          </div>
+
+
+          <div class="column">
+            <div class="field">
+              <label>Last Name</label>
+              {{input type="text" name="last_name" value=model.client_data.last_name}}
+            </div>
+            <div class="field">
+              <label>Mobile Phone</label>
+              {{input type="text" name="phone" value=model.client_data.phone}}
+            </div>
+            <div class="field">
+              <label>Work Phone</label>
+              {{input type="text" name="work_phone" value=model.client_data.work_phone}}
+            </div>
+          </div>
+
+        </div>
+
+
+
+
+        <div class="ui three column relaxed grid client-location">
+
+          <div class="column">
+            <div class="field">
+              <label>Current City</label>
+              {{input type="text" name="city" value=model.client_data.city}}
+            </div>
+          </div>
+
+          <div class="column">
+            <div class="field">
+              <label>Current State</label>
+              {{input type="text" name="state" value=model.client_data.state}}
+            </div>
+          </div>
+
+          <div class="column">
+            <div class="field">
+              <label>Current Zip</label>
+              {{input type="text" name="zip" value=model.client_data.zip}}
+            </div>
+          </div>
+
+        </div>
+
+
+
+        <div class="ui two column relaxed grid">
+          <div class="column">
+            <div class="field">
+              <label>Client Portal Password</label>
+              {{input type="text" name="password" value=model.client_data.password}}
+            </div>
+          </div>
+          <div class="column">
+            <div class="field">
+              <label>&nbsp;</label>
+              <a class="form-text-link" {{action 'welcome_email' model.client_data.email}}>Send Welcome Email</a>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+
+
+
+
+
+
+    {{#each model.client_list}}
+
+    <div class="client-info column">
+      <div class="ui raised segment">
+
+        <div class="ui two column relaxed grid">
+          <div class="column">
+            <div class="field">
+              <label>First Name</label>
+              {{input type="text" name="c_first_name[]" value=c_first_name}}
+              {{input type="hidden" name="c_id[]" value=c_id}}
+            </div>
+            <div class="field">
+              <label>D.O.B.</label>
+              {{input type="text" name="c_date_birth[]" value=c_date_birth}}
+            </div>
+            <div class="field">
+              <label>Email</label>
+              {{input type="text" name="c_email[]" value=c_email}}
+            </div>
+            <div class="field client-address">
+              <label>Street Address</label>
+              {{input type="text" name="c_address[]" value=c_address}}
+            </div>
+
+          </div>
+          <div class="column">
+            <div class="field">
+              <label>Last Name</label>
+              {{input type="text" name="c_last_name[]" value=c_last_name}}
+            </div>
+            <div class="field">
+              <label>Mobile Phone</label>
+              {{input type="text" name="c_phone[]" value=c_phone}}
+            </div>
+            <div class="field">
+              <label>Work</label>
+              {{input type="text" name="c_work_phone[]" value=c_work_phone}}
+            </div>
+
+            <div class="field">
+              <label>Relation to Client</label>
+              <select name="c_client_relation[]">
+                {{#each client_relations}}
+                <option {{bind-attr value=value}} {{bind-attr selected=selected}}>{{title}}</option>
+                {{/each}}
+              </select>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="ui three column relaxed grid client-location">
+          <div class="column">
+            <div class="field">
+              <label>City</label>
+              {{input type="text" name="c_city[]" value=c_city}}
+            </div>
+          </div>
+          <div class="column">
+            <div class="field">
+              <label>State</label>
+              {{input type="text" name="c_state[]" value=c_state}}
+            </div>
+          </div>
+          <div class="column">
+            <div class="field">
+              <label>Zip</label>
+              {{input type="text" name="c_zip[]" value=c_zip}}
+            </div>
+          </div>
+        </div>
+
+
+        <div class="field">
+          <label>Brokerage Name (Realtor/Lender)</label>
+          {{input type="text" name="c_brokerage_name[]" value=c_brokerage_name}}
+        </div>
+
+
+        <div class="ui two column relaxed grid">
+          <div class="column">
+            <div class="field">
+              <label>Client Portal Password</label>
+              {{input type="text" name="c_password[]" value=c_password}}
+            </div>
+          </div>
+          <div class="column">
+            <div class="field">
+              <label>&nbsp;</label>
+              <a class="form-text-link" {{action 'welcome_email' c_email}}>Send Welcome Email</a>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+
+
+
+    {{/each}}
+
+
+  </div>
+
+
+
+  {{input id="project_id" type="hidden" value=model.project_id}}
+  {{#if jch_staff}}
+  <div class="client-foot">
+    <button id="save" {{action 'save' model.project_id}}>Save Client Info</button> &nbsp;&nbsp;&nbsp;
+    <a {{action 'add_contact'}} class="form-text-link">Add Contact</a>
+  </div>
+  {{/if}}
+
+</form>

@@ -1,0 +1,196 @@
+<html>
+	<head>
+
+		<title>Profile</title>
+
+		<link rel="stylesheet" href="./css/style-profiles.css" type="text/css" media="screen" />
+
+		<script type="text/javascript" src="./js/jquery-1.11.3.min.js"></script>
+		<script type="text/javascript" src="./js/handlebars.min.js"></script>
+		<script type="text/javascript" src="./js/profiles-utility.js"></script>	
+
+	</head>
+	<body>
+
+
+
+		<div id="profiles-content"></div>
+		
+		<script id="template" type="text/x-handlebars-template">
+
+{{#if profile_visible}}
+	<div class="breadcrumbs">
+		<a href="./index.html">Find a Professional</a> &nbsp; &raquo; &nbsp;
+		{{name}}
+	</div>
+	<div class="profile-detail">
+		<div class="col details">
+		<h2>{{name}}{{#if apprentice_participation}}&nbsp;&nbsp;<small><i>Apprentice Trainer</i></small>{{/if}}</h2>
+		{{#if alt_address}}
+			<h3>{{alt_address}}</h3>
+			{{#if alt_country_name}}
+				<h5>{{alt_city}}, {{alt_country_name}}</h5>
+			{{else}}					
+				<h5>{{alt_city}}, {{alt_state}} &nbsp;{{alt_zip}}</h5>
+			{{/if}}
+		{{else}}
+			<h3>{{address}}</h3>
+			{{#is country_code "==" "US"}}
+				<h5>{{city}}, {{state}} &nbsp;{{zip}}</h5>
+			{{else}}
+				<h5>{{city}}, {{country_name}}</h5>
+			{{/is}}
+		{{/if}}
+		<small><a href="http://maps.google.com/maps?f=q&hl=en&q={{map_url}}" target="_blank">[ Map / Driving Directions ]</a></small><br /><br />
+		{{#if alt_phone}}
+			<h5>{{alt_phone}}</h5>
+		{{else}}
+			{{#if phone_home}}<h5>{{phone_home}} (home)</h5>{{/if}}
+			{{#if phone_mobile}}<h5>{{phone_mobile}} (mobile)</h5>{{/if}}
+		{{/if}}
+		{{#if url}}
+			<h5><a href="{{url_formatted}}">{{url_formatted_clean}}</a></h5>
+		{{/if}}
+		{{#if email}}
+			<h5><a href="mailto:{{email}}">{{email}}</a></h5>
+		{{/if}}
+		</div>
+		<div class="col">
+			{{#if photo}}
+			<div class="profile-image">
+			<img src="{{photo}}" />
+			</div>
+			{{/if}}
+		</div>
+		{{#if video_url}}
+		<div class="col">
+			<div class="bio">
+				{{{bio_formatted}}}
+			</div>
+		</div>
+		<div class="col">
+			<div class="video-embed">
+				{{#if video_youtube}}
+				<iframe title="YouTube video player" width="340" height="255" src="http://www.youtube.com/embed/{{video_id}}" frameborder="0" allowfullscreen></iframe>
+				{{else}}
+				<iframe src="https://player.vimeo.com/video/{{video_id}}" width="340" height="255" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+				{{/if}}
+			</div>
+		</div>
+		{{else}}
+		<div class="bio">
+				{{{bio_formatted}}}
+		</div>	
+		{{/if}}
+		<div class="credentials">
+			{{#if years_trainer}}<h3>{{years_trainer}} Years Training</h3>{{/if}}
+			{{#if years_reining}}<h3>{{years_reining}} Years in Reining</h3>{{/if}}
+			{{#if years_instructor}}<h3>{{years_instructor}} Years Riding Instructor</h3>{{/if}}
+			{{#if years_location}}<h3>{{years_location}} Years Current Location</h3>{{/if}}
+			{{#if horses_available}}<h3>Lesson horses available</h3>{{/if}}
+			{{#if horses_outside}}<h3>Sale preparation services available</h3>{{/if}}
+		</div>
+		<div class="offerings">
+			<h3>Types of Student Riders</h3>
+			<ul>
+				{{#each list_types_students}}
+				<li>{{this}}</li>
+				{{/each}}
+			</ul>
+		</div>
+		<div class="offerings">
+			<h3>Types of Lessons Provided</h3>
+			<ul>
+				{{#each list_types_lessons}}
+				<li>{{this}}</li>
+				{{/each}}
+			</ul>
+		</div>
+		<div class="offerings">
+			<h3>Professional Services Offered</h3>
+			<ul>
+				{{#each list_professional_services}}
+				<li>{{this}}</li>
+				{{/each}}
+			</ul>
+		</div>
+		<div class="offerings">
+			<h3>Professional Horseman / Accreditations</h3>
+			<ul>
+				{{#each list_professional_accreditations}}
+				<li>{{this}}</li>
+				{{/each}}
+			</ul>
+		</div>
+		<div class="offerings">
+			<h3>Official Judge</h3>
+			<ul>
+				{{#each list_official_judge}}
+				<li>{{this}}</li>
+				{{/each}}
+			</ul>
+		</div>
+		<div class="offerings">
+			<h3>Languages Spoken</h3>
+			<ul>
+				{{#each list_languages}}
+				<li>{{this}}</li>
+				{{/each}}
+			</ul>
+		</div>
+		<div class="offerings">
+			<h3>Other disciplines and specialties:</h3> {{other_disciplines}}
+		</div>
+	</div>
+{{else}}
+	{{#if disabled}}
+		<h3 class="feedback">This profile is currently hidden and will not appear on the professionals map or search results.</h3>
+	{{else}}
+		<h3 class="feedback">Profile not found. <a href="./index.html">See all Professionals</a>.</h3>
+	{{/if}}
+{{/if}}
+
+		</script>
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+
+	// /profile.html?name=romain-ampe
+	// /profile.html?name=romain-ampe&preview=true
+
+	// parse query string
+	var query_string = utility.query_string();
+
+	// fetch data from api
+  utility.api_request({
+    endpoint: 'profile-detail',
+    data: {
+			name: query_string['name'],
+			preview: query_string['preview'],
+    },
+    callback: function(api_data){
+	    
+			// render the template			
+			utility.render_template("#template", api_data);
+
+			// set the page title
+			document.title = "Profile - " + api_data.name;
+
+    }
+  });
+
+</script>
+
+
+	</body>
+</html>

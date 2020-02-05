@@ -1,0 +1,235 @@
+<div class="mb3 tr">
+  <input placeholder="Search communication" class="dib v-mid w-40" type="text" name="k" value="">
+  <img {{action search}} class="dib v-mid w2 o-30 pointer ml2" src="//s3.amazonaws.com/clickbuild/images/search.svg">
+</div>
+
+
+{{#if model.phases}}
+<ul class="data-table progress-table">
+  <li class="data-head">
+    <span class="c1">Phase</span>
+    <span class="c2">Start / Goal</span>
+    <span class="c3">Progress (Days)
+      <span>
+        <b>1</b>
+        <b>5</b>
+        <b>10</b>
+        <b>15</b>
+        <b>20</b>
+        <b>25</b>
+        <b>30</b>
+        <b>35</b>
+        <b>40</b>
+        <b>45</b>
+        <b>50</b>
+        <b>+</b>
+      </span>
+    </span>
+    <span class="c4">PPC Status</span>
+  </li>
+
+  {{#each model.phases}}
+  <li {{bind-attr class=":phase phase_class"}} {{bind-attr data-phase-id=phase_id}}>
+    <div class="hr"></div>
+    <span class="c1">
+      {{title}}
+      <small>{{#if staff_lead}}Lead: {{staff_lead}} &nbsp;&nbsp;&nbsp; {{/if}}({{days_allocated}} Days)</small>
+    </span>
+    <span class="c2 deadline-edit">
+      <span
+        {{action 'deadline_update' 'Start Date' phase_id deadline_start_edit controller.project_id}}>{{#if deadline_start}}{{deadline_start}}{{/if}}</span>
+      <span
+        {{action 'deadline_update' 'Finish Date' phase_id deadline_finish_edit controller.project_id}}>{{#if deadline_finish}}{{deadline_finish}}{{/if}}</span>
+    </span>
+    <span class="c3 progress-indicators">
+      <span {{bind-attr class=":progress-bar-container ppc_class"}}>
+        {{#if show_indicators}}
+        <span {{bind-attr data-allocated-id=phase_id}} {{bind-attr data-width=width_allocated}} class="progress-bar" {{bind-attr style=style_width_alotted}}>
+          {{#if days_excess}}<span class="progress-excess">+</span>{{/if}}
+        </span>
+
+        <span {{bind-attr data-current-id=phase_id}} class="progress-current"
+          {{bind-attr style=style_width_current}}></span>
+        {{/if}}
+      </span>
+      <span class="progress-label">
+        {{#if show_indicators}}
+          {{#if completed}}
+            {{progress_label}} on {{indicator_complete_date}} <i>(day {{day_current}} of {{day_allocated}})</i>
+          {{else}}
+            {{progress_label}} on day {{day_current}} of {{day_allocated}}
+          {{/if}}
+        {{/if}}
+      </span>
+    </span>
+
+    <span class="c4">
+      <span class="ppc-status">
+        <span {{bind-attr class=":status-icon status_icon_class"}}></span>
+      </span>
+    </span>
+
+    <img src="//s3.amazonaws.com/clickbuild/images/cb1/blank.gif" class="tasks-link" {{action 'tasks_view' phase_id}} />
+
+  </li>
+
+  <ul class="phase-tasks" {{bind-attr data-phase-id=phase_id}} style="display: none;">
+
+    {{#each tasks}}
+
+    <li {{bind-attr data-task-id=id}}>
+      <span {{bind-attr class=":c5 completed"}}>
+        {{#if can_view_tasks}}
+        <input type="checkbox" {{bind-attr checked=completed}} />
+        {{/if}}
+        <label {{action 'task_complete' id}}>
+          <i>{{title}}</i>
+          {{#if completed}}<small class="completed">{{completed_label}}</small>{{/if}}
+          {{#if staff_lead}}<small class="staff-lead">Staff Lead: {{staff_lead}}</small>{{/if}}
+        </label>
+
+        {{#if can_view_tasks}}
+        <img src="//s3.amazonaws.com/clickbuild/images/cb1/blank.gif" class="task-complete-link"
+          {{action 'task_complete' id}} />
+        {{/if}}
+        <div class="communication">
+
+          {{#if template_post_trigger}}<a {{bind-attr href=post_preview_url}}><i class="external url sign icon"></i></a>{{/if}}
+
+          {{#if can_edit}}
+          <a class="progress-delete-icon" {{action 'delete_task' id}}><i class="ui trash icon"></i></a>
+          {{/if}}
+
+
+          {{#if event_id}}
+          <i class="calendar icon tip" style="position: relative;" {{bind-attr data-tip=event_label}}></i>
+          {{/if}}
+          {{#if href_discussion}}
+          <a {{bind-attr href=href_discussion}}>
+            <i {{bind-attr class=":comment :icon has_communication"}}></i>
+            <span class="comments-total">{{comments_total}}</span>
+          </a>
+          {{/if}}
+
+        </div>
+      </span>
+      <span class="c6">{{#if due_date}}<b>Due:</b> {{due_date}}{{/if}}</span>
+    </li>
+
+    {{/each}}
+
+    {{#if can_add_tasks}}
+    <li class="add-task">
+      <span><i class="add icon"></i> New Task</span>
+      <a {{bind-attr href=href_new}}><img src="//s3.amazonaws.com/clickbuild/images/cb1/blank.gif"
+          class="tasks-link" /></a>
+    </li>
+    {{/if}}
+
+  </ul>
+
+  {{/each}}
+
+</ul>
+
+
+{{/if}}
+
+
+
+<br /><br />
+
+
+<form id="progress-edit" class="ui form pe-block progress-control">
+
+  <div class="ui three column relaxed grid">
+    <div class="column">
+      <div class="field">
+        <label>Contract Date <small>mm/dd/yyyy</small></label>
+        {{input type="text" name="date_contract" class="datepicker" value=model.date_contract}}
+      </div>
+    </div>
+
+    <div class="column">
+      <div class="field">
+        <label>Start Date</label>
+        {{input type="text" name="date_start" class="datepicker" value=model.date_start}}
+      </div>
+    </div>
+
+    <div class="column">
+      <div class="field">
+        <label>Permit Date</label>
+        {{input name="date_permit" type="text" class="datepicker" value=model.date_permit}}
+      </div>
+    </div>
+
+  </div>
+  <div class="ui three column relaxed grid">
+
+    <div class="column">
+      <div class="field">
+        <label>CO Date</label>
+        {{input name="date_co" type="text" class="datepicker" value=model.date_co}}
+      </div>
+    </div>
+
+
+    <div class="column progress-control-dates">
+      <div class="inline-block field">
+        <label>Completion / Pre-walk Date</label>
+        {{input name="date_walk" type="text" class="input-bb datepicker" value=model.date_walk placeholder="mm/dd/yyyy" }}
+        &nbsp;&nbsp;
+        {{input name="time_walk" type="text" class="input-bb" value=model.time_walk placeholder="10:00am" }}
+      </div>
+    </div>
+
+    <div class="column progress-control-dates">
+      <div class="inline-block field">
+        <label>Closing Date</label>
+        {{input name="date_closing" class="input-bb datepicker" type="text" value=model.date_closing
+				placeholder="mm/dd/yyyy" }}
+        &nbsp;&nbsp;
+        {{input name="time_closing" class="input-bb" type="text" value=model.time_closing placeholder="10:00am" }}
+      </div>
+    </div>
+
+  </div>
+
+
+
+  <div class="ui three column relaxed grid last">
+
+
+    <div class="column">
+      <div class="field">
+        <label>Project Supervisor</label>
+
+        <select name="supervisor_id">
+          <option></option>
+          {{#each model.supervisors}}
+          <option {{bind-attr value=id}} {{bind-attr selected=selected}}>{{title}}</option>
+          {{/each}}
+        </select>
+      </div>
+    </div>
+
+  </div>
+
+
+  <div class="field">
+    <label>Closing Notes</label>
+    {{textarea name="closing_notes" class="closing-notes-progress" value=model.closing_notes}}
+  </div>
+
+
+  {{input type="hidden" id="project_id" name="project_id" value=model.project_id}}
+  {{#if model.can_view_save}}
+  <button id="save" {{action 'save' model.project_id}}>Update Dates / Notes</button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  {{/if}}
+
+  {{#if model.can_view_edit}}
+  <a {{action 'edit_toggle'}} id="admin-edit-progress" class="form-text-link">Edit progress details</a>
+  {{/if}}
+
+</form>

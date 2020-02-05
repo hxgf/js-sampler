@@ -1,0 +1,1255 @@
+<html>
+
+<head>
+  <title>Real Estate Purchase Contract</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <link rel="stylesheet" href="https://s3.amazonaws.com/clickbuild/css/tachyons.min.css" />
+
+  <style>
+    @page {
+      margin: .5cm;
+    }
+
+    body,
+    body * {
+      font-family: "Arial", sans-serif;
+    }
+
+    body {
+      font-size: 11pt;
+      line-height: 1.4;
+    }
+
+    .section-header {
+      font-weight: bold;
+      margin-top: 1.5rem;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      font-weight: bold;
+    }
+
+    .section-header u {
+      display: inline-block;
+      margin-left: 1rem;
+    }
+
+
+    .section-subheader u {
+      display: inline-block;
+      margin-right: 1rem;
+    }
+
+    .page-numbers {
+      text-align: center;
+      font-size: 70%;
+      opacity: 0.8;
+    }
+
+    ol li {
+      margin-bottom: 0.5rem;
+    }
+
+    .variable-line {
+      border-bottom: 1px solid #333;
+      box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      -webkit-box-sizing: border-box;
+    }
+
+    .variable-line-special {}
+  </style>
+</head>
+
+<body>
+
+
+
+  <center>
+    <h4>Real Estate Purchase Contract</h4>
+  </center>
+
+  <p>This Real Estate Purchase Contract (the “Contract”) is entered into on
+    <span class="variable-line dib tc" style="min-width: 3rem;">&nbsp;&nbsp;{{data.contract_date}}&nbsp;&nbsp;</span> by
+    and between {{data.seller_entity}}, an Oklahoma limited liability corporation (the “Builder”), and
+    the following (collectively the “Buyer”):</p>
+
+  <div class="ph2">
+    <p>
+      <b>Buyer 1:</b>
+      <span class="variable-line dib w5">&nbsp;{{data.buyer_1}}&nbsp;</span>
+    </p>
+    <p>
+      <b>Buyer 2:</b>
+      <span class="variable-line dib w5">&nbsp;{{data.buyer_2}}&nbsp;</span>
+    </p>
+  </div>
+
+  <p>In consideration of the mutual promises in this Agreement and other good and valuable consideration, the receipt
+    and sufficiency
+    of which are hereby acknowledged, the parties agree to be legally bound by the following terms:</p>
+
+  <p class="section-header">Section 1.
+    <u>Property</u>
+  </p>
+
+  <p>The Builder shall sell and convey to the Buyer and the Buyer shall purchase from the Builder the following real
+    property,
+    together with all improvements located or to be built on the property (the “Property”):</p>
+  <div class="ph2">
+    <p>
+      <b>Street Address:</b>
+      <span class="variable-line dib w5 mr1">&nbsp;{{data.address}}&nbsp;</span> &nbsp;
+      <b>
+        <sup>1 </sup>City:</b>
+      <span class="variable-line dib mr1 tc" style="min-width: 5rem;">&nbsp;{{data.city}}&nbsp;</span> &nbsp;
+      <b>Zip:</b>
+      <span class="variable-line dib mr1 tc" style="min-width: 3rem;">&nbsp;{{data.zip}}&nbsp;</span> &nbsp;
+      <b>County:</b>
+      <span class="variable-line dib" style="min-width: 2rem;">&nbsp;{{data.county}}&nbsp;</span>
+    </p>
+    <p>
+      <b>Lot:</b>
+      <span class="variable-line dib tc mr1" style="min-width: 1rem;">&nbsp;{{data.lot}}&nbsp;</span> &nbsp;
+      <b>Block:</b>
+      <span class="variable-line dib tc mr1" style="min-width: 1rem;">&nbsp;{{data.block}}&nbsp;</span> &nbsp;
+      <b>Addition:</b>
+      <span class="variable-line dib w5">&nbsp;{{data.addition}}&nbsp;</span>
+    </p>
+  </div>
+  <p>The Property is subject to easements and restrictions of record; zoning laws and encroachments; homeowners’
+    association
+    covenants, rules and regulations; and less and except oil, gas and mineral rights.</p>
+
+  <p class="section-header">Section 2.
+    <u>Acceptance</u>
+  </p>
+
+  <!-- checked check -->
+  <p><span class="f4">{{#if data.acceptance}}&#x2612;{{else}}&#x2610;{{/if}}</span> If selected, the terms of this
+    contract are contingent upon acceptance by both the Builder and the Buyer on or
+    before
+    <span class="variable-line dib" style="min-width: 3rem;">&nbsp;&nbsp;{{data.acceptance_date}}&nbsp;&nbsp;</span> at
+    <span class="variable-line dib" style="min-width: 3rem;">&nbsp;&nbsp;{{data.acceptance_time}}&nbsp;&nbsp;</span>. If
+    this Contract is not fully executed by Buyer and Builder, and a fully-executed original delivered to
+    Builder, on or before such time, this Contract is automatically null and void and of no further force and effect.
+  </p>
+
+  <p class="section-header">Section 3.
+    <u>Broker Commissions</u>
+  </p>
+  <p>
+    <span class="section-subheader">A.
+      <u>Representation and Indemnification</u>
+    </span> Buyer releases and discharges Builder, and agrees to indemnify and hold Builder harmless, from any and all
+    claims for
+    commission or other compensation (the “Broker’s Commission”), including, but not limited to transaction fees, broker
+    bonuses, or any other additional fees that may be asserted by any real estate broker, real estate associate or
+    finder
+    arising out of the purchase and sale transaction contemplated by this Contract and not specifically identified in
+    this
+    <u>Section 3</u>. All Broker Commissions shall be calculated as a percentage of the
+    <b>lesser</b> of (i) the amount stated in the Construction Plan as of the Construction Plan Approval Date,
+    regardless of
+    subsequent amendments, if any, and (ii) the final Purchase Price of the Property.
+
+    <!-- unchecked box -->
+    <p><span class="f4">{{#if data.broker_none}}&#x2612;{{else}}&#x2610;{{/if}}</span> If selected, each party
+      represents to the other party that no real estate broker has a claim for a Broker’s
+      Commission.</p>
+
+    <!-- checked check -->
+    <p><span class="f4">{{#if data.broker_buyer}}&#x2612;{{else}}&#x2610;{{/if}}</span> If selected, Buyer represents to
+      the Builder that
+      <span class="variable-line dib tc" style="min-width: 10rem;">&nbsp;{{data.broker_buyer_name}}&nbsp;</span> (the
+      “Buyer’s Broker”) has a claim for a Broker’s Commission of:
+      <span class="variable-line dib tc" style="min-width: 3rem;">&nbsp;{{data.broker_buyer_commission}}&nbsp;</span>.
+    </p>
+
+    <!-- checked x -->
+    <p><span class="f4">{{#if data.broker_builder}}&#x2612;{{else}}&#x2610;{{/if}}</span> If selected, Builder
+      represents to the Buyer that
+      <span class="variable-line dib tc" style="min-width: 10rem;">&nbsp;{{data.broker_builder_name}}&nbsp;</span> (the
+      “Builder’s Broker”) has a claim for a Broker’s Commission of:
+      <span class="variable-line dib tc" style="min-width: 3rem;">&nbsp;{{data.broker_builder_commission}}&nbsp;</span>.
+    </p>
+  </p>
+
+  <div style="font-size: 70%;" class="mt4 mb3">
+    <div class="bt bw2 w-20 mb2"></div>
+    <sup>1</sup> Although the Property may have an address and postal code for the City of Edmond, the Property may be
+    situated
+    within the limits of the City of Oklahoma City and may be subject to taxes, laws, ordinances, zoning, utilities, and
+    the like applicable to the City of Oklahoma City.
+  </div>
+
+
+
+
+
+
+
+  <p class="section-header">Section 4.
+    <u>Purchase Price</u>
+  </p>
+  <p>
+    <span class="section-subheader">A.
+      <u>Purchase Price Computation and Payment</u>
+    </span>
+    <br />
+    <br />The Purchase Price of the property is
+    <span class="variable-line dib tc" style="min-width: 5rem;">&nbsp;{{data.purchase_price}}&nbsp;</span>
+    <br />
+    <br />The Purchase Price is the sum of the:
+    <ol>
+      <li>Base Price (<u>Section 6B</u>);</li>
+      <li>Differing Site Condition Fees (<u>Section 6D</u>);</li>
+      <li>Change Order Fees (<u>Section 6E</u>);</li>
+      <li>Price Request Fees (<u>Section 6E)</u>;</li>
+      <li>Per diem charges (<u>Section 7B</u>);</li>
+      <li>Priceincreases (<u>Section 4B</u>); and</li>
+      <li>Any other fees permitted by this Contract.</li>
+    </ol>
+    Buyer shall pay the Purchase Price as follows:
+    <ol>
+      <li><span class="variable-line dib tc" style="min-width: 5rem;">&nbsp;{{data.down_payment}}&nbsp;</span> as a down
+        payment (the “Down Payment”) delivered to Builder on or before the expiration of the Financing Contingency
+        Period (<u>Section 5A</u>), if applicable, to be applied to the Purchase Price at the Closing <u>Section 7</u>);
+      </li>
+      <li>any other fees as they become due under this Contract; and</li>
+      <li>the remaining fees at Closing pursuant to
+        <u>Section7B</u> of this Contract.</li>
+    </ol>
+    The Builder may deposit the Down Payment in any account maintained by Builder. The Buyer is not entitled to any
+    interest
+    that may accrue on the Down Payment. The Down Payment becomes non-refundable upon the Buyer’s approval of the
+    Construction
+    Plan.
+  </p>
+
+  <p>
+    <span class="section-subheader">B.
+      <u>Market Volatility</u>
+    </span> The Purchase Price is calculated based on the prices for component building materials and labor as of the
+    date the Buyer
+    approves the Construction Plan (the “Construction Plan Approval Date”) as set forth in
+    <u>Section 6B</u> of this Contract. Buyer acknowledges that the market for component building materials is volatile,
+    and
+    sudden price increases could occur. The Builder agrees to use its best efforts to obtain the lowest possible prices
+    from
+    available vendors, trades, contractors, and suppliers. In the event the cumulative price for component building
+    materials
+    or labor increases after the Construction Plan Approval Date, Buyer agrees that the Purchase Price shall be
+    increased
+    by the amount of any such price increases that cumulatively exceed one percent (1%) of the Purchase Price set forth
+    in
+    the Construction Plan on the Constructions Plan Approval Date. The Builder shall provide written notice to the Buyer
+    stating the price increase, the component building materials or labor subject to the price increase, and the source
+    of
+    supply, supported by invoices or bills of sale.</p>
+
+  <p class="section-header">Section 5.
+    <u>Financing</u>
+  </p>
+  <p class="mb4">
+    <span class="section-subheader">A.
+      <u>Financing Contingency Period</u>
+    </span> Buyer shall have fourteen (14) days from the date of this Contract (the “Financing Contingency Period”) to
+    obtain all
+    financing necessary for the purchase of the Property. If Buyer fails to terminate this Contract by delivering
+    written
+    notice to Builder during the Financing Contingency Period, if applicable, Buyer shall not be permitted to terminate
+    this Contract for failure to obtain financing. Prior to the expiration of the Financing Contingency Period, Buyer
+    shall
+    deliver a written and signed pre-qualification letter from Buyer’s lender to Builder, in form and substance
+    acceptable
+    to Builder. Builder may, at any time during the term of this Contract, require Buyer to provide additional
+    confirmation
+    of Buyer’s financial ability to pay the Purchase Price, and Buyer shall provide such confirmation to Builder in
+    writing
+    within five (5) business days of Builder’s request. If Buyer does not provide such confirmation, to Builder’s
+    reasonable
+    satisfaction, Builder may terminate this Contract, retain the Down Payment and any other amounts Buyer has paid to
+    Builder,
+    and this Contract shall terminate.</p>
+
+
+
+
+  <p>
+    <span class="section-subheader">B.
+      <u>Lender Fees</u>
+    </span> Buyer alone is responsible for payment to any lender of any fee or charge for an appraisal of the Property,
+    credit
+    reports, loan application deposit, or other fee in connection with Buyer’s loan application, whether payable to a
+    lender
+    or third party. Any fees or charges paid by Buyer in connection with the loan application process are separate from
+    Buyer’s
+    obligations under this Contract and shall not be considered components of the Down Payment.
+  </p>
+
+  <p>
+    <span class="section-subheader">C.
+      <u>Preferred Lenders</u>
+    </span> Builder shall provide Buyer a list of preferred lenders (the “Preferred Lenders”). If Buyer chooses a lender
+    other than
+    a Preferred Lender, Builder, in its sole and absolute discretion, may (i) terminate this Contract by delivering
+    written
+    notice to Buyer, or (ii) proceed with the contract.
+  </p>
+
+  <p>
+    <span class="section-subheader">D.
+      <u>Consent to Contact Lender</u>
+    </span> Buyer hereby gives consent to Buyer’s lender or financial institution to communicate with Builder or
+    Builder’s agent,
+    if any, for all purposes related to performance of this Contract and purchase of the Property, including, but not
+    limited
+    to, verification of Buyer’s ability to pay the Purchase Price in cash or inquiries related to Buyer’s loan
+    application.
+  </p>
+
+  <p>
+    <span class="section-subheader">E.
+      <u>Change in Financial Health</u>
+    </span> If at any time during the term of this Contract the financial health of the Buyer adversely changes, Buyer
+    agrees to
+    notify the Builder immediately. Changes include, but are not limited to, the change or loss of employment by any
+    person
+    identified herein as a Buyer; the assumption of new debt that may affect the Buyer’s ability to secure a loan for
+    the
+    Purchase Price; the purchase of any item or property that may affect the Buyer’s ability to secure a loan for the
+    Purchase
+    Price; and lawsuits, judgments, divorce, separation, bankruptcy, foreclosure, illness, or death.
+  </p>
+
+  <p>
+    <span class="section-subheader">F.
+      <u>Appraisals</u>
+    </span> Buyer agrees to provide to Builder, or instruct Buyer’s lender to provide to Builder, an electronic copy of
+    Buyer’s appraisal
+    of the Property within three (3) days of completion of the appraisal. If an electronic copy is not available, Buyer
+    shall
+    furnish a paper copy at the time of Closing. Buyer acknowledges that the Purchase Price is computed as specified in
+    Section
+    4 of this Contract and the Purchase Price shall not be adjusted based on a differing value presented in any
+    appraisal
+    obtained on behalf of Buyer.</p>
+
+  <p class="section-header">Section 6.
+    <u>Construction</u>
+  </p>
+  <p>
+    <span class="section-subheader">A.
+      <u>House Construction</u>
+    </span> Buyer hereby engages Builder to construct a home (the “House”), which shall be included in the definition of
+    “Property”
+    identified in Section 1 of this Contract. Builder agrees to construct the House in substantial compliance with the
+    specifications
+    requested by Buyer as more fully set forth below. Buyer acknowledges reasonable differences are normal in home
+    construction,
+    which may result in a variation in the finishes or in the square footage of the House and are to be expected. Buyer
+    acknowledges
+    and agrees that Builder may substitute like-quality building materials or make reasonable changes to plans,
+    specifications
+    and/or floor plans, for efficient construction of the House, without Buyer’s consent.
+  </p>
+
+
+  <p>
+    <span class="section-subheader">B.
+      <u>Construction Plan Selection and Modifications</u>
+    </span>
+    <ol>
+      <li>Concurrently with signing this Contract, Buyer shall choose from a selection of base construction plans
+        offered by
+        Builder and shall indicate any modifications and specifications Buyer wishes to make to the chosen base
+        construction
+        plan. Builder shall incorporate Buyer’s requested modifications and specifications into a construction plan (the
+        “Construction Plan”) for the House which shall state the base price (the “Base Price”) of the House. Buyer shall
+        indicate Buyer’s approval of the Construction Plan in writing. The approved Construction Plan, along with any
+        Change
+        Orders (defined in <u>Section 6D</u>) approved in writing by the parties, shall be attached to this Contract and
+        incorporated into its
+        terms by reference. Buyer acknowledges that any selections Buyer makes as to color schemes, paint, finishes,
+        trim
+        selection, and the like shall be recorded in design notes accompanying the Construction Plan on the Construction
+        Plan Approval Date. Such selections shall not be modified after the Construction Plan Approval Date unless Buyer
+        complies with the Change Order provisions in Section 3E of this Agreement.
+      </li>
+      <li>Items not specifically described in the Construction Plan will be determined by Builder’s standard grade
+        quality. Any
+        fixtures, furniture or furnishings in any model, spec, past, or present home shown by the Builder as resembling
+        the
+        Construction Plan are for exhibition purposes only and are not included in the House unless specifically stated
+        in
+        the Construction Plan. Buyer agrees that Builder is the final authority for the proper usage, arrangement, and
+        placement
+        of fixtures, equipment, electrical outlets, building materials, and the like, unless specifically stated in the
+        Construction
+        Plan.</li>
+    </ol>
+  </p>
+
+
+
+  <p>
+    <span class="section-subheader">C.
+      <u>Construction Standards</u>
+    </span> The House shall be constructed in substantial compliance with (i) the Construction Plan, (ii) applicable
+    state and local
+    building codes, and (iii) the “Standards for Residential Construction” provided in the Limited Warranty (defined in
+    Section
+    9). Whether or not associated with conditions covered by the Limited Warranty, Builder expressly disclaims all
+    warranties,
+    including but not limited to, any express or implied warranties related to the presence of mold, mildew, fungi, or
+    spores.
+  </p>
+
+  <p>
+    <span class="section-subheader">D.
+      <u>Differing Site Conditions</u>
+    </span> A “Differing Site Condition” is a physical characteristic of the Property that materially changes the
+    construction techniques
+    from those reasonably expected at the time the parties sign this Contract. By way of example, and not as a
+    limitation,
+    subsurface or latent physical conditions or unknown physical conditions of an unusual nature that are not reasonably
+    foreseeable may be present on or near the Property. A Differing Site Condition shall be addressed as follows:
+    <ol>
+      <li>In the event Builder encounters a Differing Site Condition, Builder shall promptly notify Buyer of such a
+        condition.
+        Buyer agrees to investigate a Differing Site Condition within five (5) business days from Buyer’s receipt of
+        notice
+        from Builder. If Buyer fails to investigate a Differing Site Condition within five (5) business days from the
+        date
+        Buyer receives notice from Builder, Buyer hereby affirmatively agrees that Builder is authorized to proceed with
+        construction pursuant to Section 6D2 of this Agreement. Upon Buyer’s investigation of a Differing Site Condition
+        within the allotted five (5) business days, Buyer shall either (i) authorize Builder to proceed with
+        construction,
+        or (ii) advise Builder in writing that Buyer disputes the presence of a Differing Site Condition.</li>
+      <li>If Builder is authorized to proceed with construction (whether by Buyer’s express authorization or by default
+        upon
+        Buyer’s failure to investigate a Differing Site Condition), Builder address the Differing Site Condition and
+        Buyer
+        shall pay an amount (the “Differing Site Condition Fee”) equal to the actual costs incurred by Builder for
+        materials
+        and labor required to address the Differing Site Condition, plus ten percent (10%).</li>
+      <li>In the event Buyer and Builder fail to agree that a Differing Site Condition exists, Builder, in its sole and
+        absolute
+        discretion, may either (i) terminate this Contract upon written notice to Buyer or (b) address the Differing
+        Site
+        Condition and complete construction according to the terms of this Contract without regard to the Differing Site
+        Condition Fee, in which case Buyer releases and discharges Builder, and agrees to indemnify and hold Builder
+        harmless,
+        from any and all claims for injuries or damages to person or property that arise from a Differing Site
+        Condition.</li>
+    </ol>
+  </p>
+
+
+
+  <p>
+    <span class="section-subheader">E.
+      <u>Change Orders</u>
+    </span>
+    <ol>
+      <li>Buyer shall make any requests for changes, variation, alterations, upgrades, deletions or additions to the
+        Construction
+        Plan (each a “Change Order”) in writing and Builder’s approval of any Change Order must be in writing. Any items
+        selected by Buyer which exceed any cost allowances specified in the Construction Plan shall also be deemed a
+        “Change
+        Order”. Builder, in its sole and absolute discretion, may elect not to approve a Change Order. Buyer shall pay
+        in
+        advance for each Change Order an amount equal to the (i) estimated combined cost of the materials and labor,
+        plus
+        (ii) twenty percent (20%), plus (iii) an administrative fee of $100. After the Change Order has been completed,
+        the
+        Buyer shall pay any amounts that exceed this estimated amount. The final amount shall be the “Change Order Fee.”
+        Alternatively, Builder, in its sole and absolute discretion, may elect to defer collection of the Change Order
+        Fee.
+        Buyer agrees to pay all fees (whether estimated or final) associated with a Change Order upon Buyer’s receipt of
+        an invoice from Builder. Change Order Fees are non-refundable and the the requirement to pay Change Order Fees
+        shall
+        survive the Closing and the expiration or termination of this Contract.</li>
+      <li>Buyer acknowledges that the appraised value of the Property does not necessarily increase by the value or cost
+        of any
+        Change Order. Any sums paid or due by Buyer to Builder pursuant to a Change Order shall not be refunded under
+        any
+        circumstances (even in the event this contract is terminated by either Party), and are separate from and in
+        addition
+        to the Down Payment. Any equipment, building materials or any other items installed pursuant to a Change Order
+        before
+        Closing are automatically deemed to be fixtures of the Property and shall transfer to Buyer only upon Closing.
+      </li>
+
+
+      <li>Builder acknowledges that Buyer may request the prices of various options from Builder in order to make
+        decisions which
+        impact the Purchase Price. Buyer acknowledges that requests for prices take valuable time from Builder.
+        Therefore,
+        Buyer shall pay in advance of each price request an administrative fee (the “Price Request Fee”) of one hundred
+        dollars
+        ($100), unless waived in writing by Builder. Alternatively, Builder, in its sole and absolute discretion, may
+        elect
+        to defer collection of the Price Request Fee. Buyer agrees to pay Price Request Fees upon Buyer’s receipt of an
+        invoice
+        from Builder. Price Request Fees are nonrefundable and the requirement to pay Price Request Fees shall survive
+        the
+        Closing and the expiration or termination of this Contract.</li>
+    </ol>
+  </p>
+
+
+
+
+  <p>
+    <span class="section-subheader">F.
+      <u>Soil Tests</u>
+    </span> Buyer acknowledges that Builder has not obtained a soil report or soil test on the Property. Buyer may
+    obtain a soil
+    report or soil test prior to Builder’s construction of the Home; provided, however, any such soil report or soil
+    test
+    shall be conducted at Buyer’s expense and must be completed within seven (7) days of the of the date of this
+    Agreement.
+    Buyer further acknowledges that Builder may rely upon the Construction Plan for the construction of the Home’s
+    foundation.
+  </p>
+
+
+  <p>
+    <span class="section-subheader">G.
+      <u>Commencement</u>
+    </span> Subject to Permitted Delays, Builder agrees to begin construction of the House within forty-five (45) days
+    after Builder
+    receives all of the following: (i) this signed Contract; (ii) the Loan Commitment (in the event Buyer is obtaining a
+    loan to purchase the Property); (iii) a letter of credit in form satisfactory to Builder stating that Buyer has the
+    funds
+    necessary to pay the Purchase Price (in the event Buyer is paying cash to purchase the Property); and (iv)the signed
+    Construction Plan. “Permitted Delays” means (i) any act by Buyer or Buyer’s lender, if applicable, which causes or
+    contributes
+    to any delay in construction, or (ii) any event of force majeure, act of God, fire or other casualty, delay in
+    deliveries,
+    strikes, boycotts, or the non-availability of materials, or (iii) any other causes beyond Builder’s reasonable
+    control.
+  </p>
+
+
+  <p>
+    <span class="section-subheader">H.
+      <u>No Interference with Construction by Buyer or Third-Parties</u>
+    </span>
+    <ol>
+      <li>Buyer shall not interfere, either directly or indirectly, with or give orders to Builder’s employees,
+        subcontractors,
+        vendors, suppliers or laborers. Buyer shall not perform or attempt to perform, either directly or indirectly
+        (e.g.
+        engaging contractors, subcontractors, vendors, suppliers or laborers), any work of any type on the Property.
+        Buyer
+        shall not submit Change Order requests to or negotiate for additional work with Builder’s subcontractors,
+        vendors,
+        suppliers or laborers.
+      </li>
+      <li>Buyer shall not engage the services of an independent decorator or designer (“Designer”) without first
+        obtaining Builder’s
+        written consent. Builder, in its sole and absolute discretion, may refuse to give consent. In the event Builder
+        consents
+        to Buyer’s engagement of a Designer, Buyer shall require Designer to provide to Builder (i) proof to builder’s
+        satisfaction
+        that Designer has adequate worker’s compensation insurance and general liability insurance, and (ii) a lien
+        release
+        releasing the Property from any and all liens arising from Designer’s services, whether such liens arise at law
+        or
+        in equity. Buyer acknowledges that Builder will not accept instructions, authorizations, or the like from
+        Designer
+        and Buyer is solely responsible for communicating with Builder. The Purchase Price shall include fees at
+        Builder’s
+        hourly rate for actual time spent by Builder to accommodate Buyer’s engagement of a Designer.
+      </li>
+    </ol>
+  </p>
+
+
+  <p>
+    <span class="section-subheader">I.
+      <u>Electronic Communications</u>
+    </span> Any notice, request, or approval required to be made pursuant to this
+    <u>Section 6</u> may be made in electronic form pursuant to Builder’s standard procedures and project management
+    software.
+    The parties acknowledge that any use of electronic communications and electronic signatures to perform the
+    requirements
+    in this
+    <u>Section 6</u> shall be binding upon each party as if that party had rendered a handwritten signature.
+  </p>
+
+
+  <p class="section-header">Section 7.
+    <u>Closing</u>
+  </p>
+  <p>
+    <span class="section-subheader">A.
+      <u>Prior to Closing</u>
+    </span>
+    <ol>
+      <li>Prior to closing, Buyer shall personally inspect the Property with, and only with, an official representative
+        of Build-
+        er or, at Builder’s request, Builder’s third-party warranty service (the “Warranty Service”), at a time
+        agreeable
+        to the parties Monday through Friday between the hours of 8:00 a.m. and 5:00 p.m., except on holidays. This
+        pre-closing
+        inspection shall include an orientation on the Limited Warranty (which may be provided by the Warranty Service).
+        Any failure of Buyer to participate in the pre-closing walk-through and orientation on the Limited Warranty
+        shall
+        constitute absolute and complete acceptance of the Property by Buyer as complete and satisfactory and Builder
+        will
+        have no obligation to make repairs to the Property except as otherwise described in the Limited Warranty.
+      </li>
+
+      <li>Buyer will provide a signed detailed list (the “Punchlist”) to Builder, or at Builder’s request, to the
+        Warranty Ser-
+        vice, of any defects or uncompleted work or any repair or completion items to Builder. Builder or Builder’s
+        Warranty
+        Service will provide a form for Buyer to use to create the Punchlist and Buyer must submit the Punchlist at
+        least
+        seven (7) days before the Closing. Any failure of Buyer to timely provide Builder with the Punchlist shall
+        constitute
+        absolute and complete acceptance of the Property by Buyer as complete and satisfactory and Builder will have no
+        obligation
+        to make repairs to the Property except as otherwise described in the Limited Warranty. If any Punchlist items
+        cannot
+        be completed before Closing, Builder shall have a reasonable time after Closing to complete any Punchlist items
+        (in
+        any event, Builder shall have at least sixty (60) days after Closing to complete the Punchlist items). Buyer
+        agrees
+        that incomplete Punchlist items shall not be a valid basis for delaying the Closing. All work to complete
+        Punchlist
+        items will be done Monday through Friday between the hours of 8:00 a.m. and 5:00 p.m., except on holidays and
+        Buyer’s
+        must be present. In the event Buyers and Builder fail to agree on Punchlist items, Builder, in its sole and
+        absolute
+        discretion, may terminate this Contract.
+      </li>
+      <li>If Buyer wishes to engage a third-party inspection service to inspect the Property prior to Closing, Buyer
+        must give
+        Builder at least sixty (60) days written notice and any such third-party inspection must be coordinated with
+        Builder.
+        Buyer agrees that no third-party inspection service will be permitted on the Property without the required
+        notice.
+        Any third-party inspection service must schedule an inspection with Builder Monday through Friday between the
+        hours
+        of 8:00 a.m. and 5:00 p.m., except on holidays. Buyer agrees that Builder will address items identified by a
+        third-party
+        inspection service only to the extent necessary to comply with applicable building codes and Builder’s Standards
+        for Residential Construction.
+      </li>
+    </ol>
+  </p>
+  <p>
+    <span class="section-subheader">B.
+      <u>Closing; Possession:</u>
+    </span>
+    <ol>
+      <li>The closing date (the “Closing Date”) for the closing (the “Closing”) of this contract, will be at a date and
+        time
+        mutually agreeable to the parties. The Closing shall occur at
+        <span class="variable-line dib" style="min-width: 10rem;">&nbsp;{{data.closing_1}}&nbsp;</span> <span
+          class="variable-line dib" style="min-width: 22rem;">&nbsp;{{data.closing_2}}&nbsp;</span>. If Buyer fails or
+        refuses to close, Builder, in addition to any other remedies available to Builder,
+        shall be entitled to receive from Buyer a per diem charge of sixty dollars ($60) beginning on the Closing Date
+        and
+        continuing to and including the date of final Closing.
+      </li>
+      <li>At Closing, Builder shall provide Buyer with:
+        <ol type="a">
+          <li>Applicable manufacturer’s warranties and manuals;</li>
+          <li>A subterranean termite soil treatment certification issued to Builder or Buyer from a licensed, bonded
+            pest control
+            company, certifying that the foundation of the House has been treated against termites with a pesticide
+            approved
+            for such use by the Federal Government; and</li>
+          <li>The Limited Warranty, if not already delivered to Buyer. d. Possession of the Property</li>
+        </ol>
+      </li>
+      <li>At Closing, Buyer shall provide Builder with:
+        <ol type="a">
+          <li>The balance of the Purchase Price, via cashier’s check or other certified funds. No portion of the balance
+            of the
+            Purchase Price or any sums due under this Contract will be withheld from Builder at Closing; and
+          </li>
+          <li>Any other documents necessary to complete the Closing.</li>
+        </ol>
+      </li>
+    </ol>
+  </p>
+
+
+
+
+
+
+  <p>
+    <span class="section-subheader">C.
+      <u>Title and Deed; Survey</u>
+    </span> At the Closing, Builder shall transfer title to the Property by general warranty deed (the “Deed”) in
+    statutory form.
+    Upon request, Builder will deliver or make available to Buyer an abstract of title certified at least to the date of
+    this Contract. Buyer, at Buyer’s expense and in Buyer’s discretion, may obtain any of the following: (i) a title
+    opinion
+    or title commitment and title insurance policy, or (ii) a survey of the Property. Buyer may object to any issues of
+    title
+    which constitute a valid objection to title under the Real Estate Title Examination Standards of the Oklahoma Bar
+    Association.
+    In the event any valid objections are raised by Buyer, Builder, in its sole and absolute discretion, may remove or
+    cure
+    such objections to title prior to the Closing. If Builder fails to remove or cure any such objections, Buyer’s sole
+    and
+    exclusive remedy will be to (i) purchase the Property subject to such objections, or (ii) terminate this Contract by
+    written notice to Builder, in which case, all sums shall be returned to Buyer except the (a) Down Payment, (b)
+    Changer
+    Order Fees, (c) Price Request Fees, and (d) any fees paid pursuant to
+    <u>Section 6H</u> and neither party shall have any further obligation under this Contract.
+  </p>
+
+
+
+  <p class="mb4">
+    <span class="section-subheader">D.
+      <u>Closing Costs; Taxes</u>
+    </span> Builder shall pay the cost of any documentary tax stamps due on the Deed and the cost to certify the
+    abstract of title
+    to the Closing Date. Buyer shall pay all other closing costs, including the cost of recording the Deed, and all
+    costs
+    charged by Buyer’s lender, if applicable. Buyer and Builder shall each pay their own attorneys’ fees, if applicable.
+    All ad valorem taxes and special assessments imposed on the Property for the current tax year shall be paid by
+    Builder
+    if due and payable before the Closing Date and by Buyer if due and payable on or after the Closing Date. If the
+    amount
+    of ad valorem or special assessments for the current tax year has not been determined by the Closing Date, the taxes
+    shall be prorated based on the preceding tax year. Builder shall pay all utility costs, homeowners association dues,
+    if any, and all other expenses related to the Property, which were incurred for periods prior to the Closing Date,
+    and
+    Buyer shall pay such costs and expenses incurred for periods following and including the Closing Date.
+
+  </p>
+
+  <p>
+    <span class="section-subheader">E.
+      <u>Post Closing</u>
+    </span>
+    <ol>
+      <li>Buyer and Builder agree to comply with and to be bound by the Notice of Opportunity to Repair Act (the “Act”)
+        codified
+        at Title 15 of the Oklahoma Statutes, §§ 765.5 to 765.6. The term “Construction Defect” shall have the same
+        meaning
+        as defined in the Act as of the date of this Contract. Prior to initiating any dispute resolution proceedings
+        pursuant
+        to the terms of this Contract or filing a lawsuit, Buyer shall first present to Builder a written notice of
+        Construction
+        Defects. Buyer shall allow Builder to inspect any Construction Defects and present to Buyer a written response
+        which
+        shall include the Builder’s offer to repair defects or compensate Buyer for such Construction Defects within
+        thirty
+        (30) days after receipt of the notice of Construction Defects. Nothing in this
+        <u>Section 7E</u> shall be construed to relieve the parties from compliance with the alternative dispute
+        resolution
+        requirements of
+        <u>Section 8</u> of this Contract and Buyer agrees that compliance with the terms of this
+        <u>Section 7E</u> shall be a mandatory condition precedent to pursuing any form of dispute resolution or
+        lawsuit.
+      </li>
+      <li>If for any reason delays should occur in the transfer of utilities from Builder to Buyer, Buyer acknowledges
+        and agrees
+        that Buyer is responsible for any and all utility costs incurred on or after the Closing Date. Buyer agrees to
+        make
+        the Property available after the Closing Date for any inspections required by city inspectors, Builder, the
+        Warranty
+        Service, or any other government authority, Monday through Friday between the hours of 8:00 a.m. and 5:00 p.m.,
+        except
+        on holidays.
+      </li>
+      <li>After construction has commenced, Builder has no obligation to preserve property pins on the Property. Buyer
+        acknowledges
+        that any survey to locate property pins (i.e., for the purposes of installing fencing after Closing) shall be
+        obtained
+        by Buyer at Buyer’s sole expense..
+      </li>
+    </ol>
+  </p>
+
+
+  <p class="section-header">Section 8.
+    <u>Arbitration of Disputes, Liens, Attorney Fees</u>
+  </p>
+  <p>
+    <span class="section-subheader">A.
+      <u>Arbitration</u>
+    </span> Any and all disputes, controversies, or claims (a “Dispute”) of any kind whatsoever between Builder and
+    Buyer, including
+    but not limited to, any Disputes arising out of or relating to: (i) this Contract, including the Construction Plan,
+    or
+    the breach of this Contract; or (ii) any item under the Limited Warranty (regardless as to whether such item is
+    covered
+    or excluded); or (iii) the course of dealing by and between the parties; or (iv) the construction of the House, and
+    any
+    alleged defects (including any alleged Construction Defects) relating thereto; or (v) the existence, construction,
+    validity,
+    interpretation or meaning of this Contract; or (vi) the performance, non-performance, breach, enforcement,
+    operation,
+    continuance or termination of this Contract; or (vii) the substantial completion of the House or Builder’s
+    satisfactory
+    completion of the Punchlist items, if any; or (viii) violation of any law; or (ix) all allegations of liability,
+    tortious
+    conduct, fraud, concealment, misrepresentation, negligence, etc. between Builder and Buyer, shall be submitted to
+    binding
+    arbitration in accordance with the Federal Arbitration Act (9 USC Sec. 1 et seq), in the city where the Property is
+    located.
+    Arbitrators will be selected in accordance with the rules contained within such act. The determination of the
+    arbitrators
+    as to the resolution of the Dispute shall be binding on both Builder and Buyer. The arbitrators shall conduct the
+    arbitration
+    such that a final result, determination, finding, judgment and/or award (the “Final Determination”) is made or
+    rendered
+    as soon as practicable. Nothing in this section shall prohibit either Builder or Buyer from instituting litigation
+    to
+    enforce any Final Determination. The provisions of this
+    <u>Section 8A</u> shall be a complete defense to any suit, action or proceeding instituted in any federal, state or
+    local
+    court or before any administrative tribunal with respect to any controversy, dispute or claim to be arbitrated in
+    accordance
+    with this Contract. This
+    <u>Section 8</u> in its entirety shall expressly survive the Closing, and the expiration or termination of this
+    Contract.
+  </p>
+
+
+
+  <p>
+    <span class="section-subheader">B.
+      <u>Attorney’s Fees</u>
+    </span> If any party commences litigation in violation of the arbitration provisions in this
+    <u>Section 8</u>, such party shall be liable to the other party to the litigation in an amount equal to their costs
+    and
+    expenses, including attorney’s fees incurred in seeking or obtaining a dismissal or a stay of such litigation. The
+    parties
+    agree that either the Court in which the litigation was stayed or dismissed or the arbitrator can enter an order or
+    judgment
+    for such costs and attorney’s fees.
+  </p>
+
+
+  <p class="section-header">Section 9.
+    <u>Warranty, Waiver, Release</u>
+  </p>
+  <p>
+    <span class="section-subheader">A.
+      <u>Limited Warranty</u>
+    </span>
+    <br />BUYERS HAVE REVIEWED AND ACCEPTED THE LIMITED WARRANTY (THE “LIMITED WARRANTY”) PROVIDED BY BUILDER. BY
+    SIGNING BELOW,
+    BUYERS ACKNOWLEDGE THAT THE LIMITED WARRANTY IS THE ONLY WARRANTY OF ANY KIND BEING OFFERED TO BUYER FROM BUILDER,
+    AND
+    THAT BUILDER IS ABSOLUTELY NOT RESPONSIBLE FOR ANY CLAIMS OF ANY KIND THAT ARE NOT SPECIFICALLY COVERED BY THE
+    LIMITED
+    WARRANTY, INCLUDING, BUT NOT LIMITED TO, ANY CLAIMS FOR ANY LOSS OR DAMAGE, INCLUDING ANY BODILY INJURY, ILLNESS OR
+    ALLERGIC
+    REACTION SUSTAINED BY ANYONE AS A RESULT OF THE PRESENCE OF MOLD, MILDEW, FUNGI, SPORES, BIO AEROSOLS OR ANY
+    PESTICIDE,
+    CHEMICAL, ORGANISM OR SUBSTANCE, WHICH IS OR MAY BE PRESENT IN THE PROPERTY. EXCEPT FOR THE SPECIFIC TERMS OF THE
+    LIMITED
+    WARRANTY, THE PROPERTY IS BEING PROVIDED FROM BUILDER TO BUYER STRICTLY IN AN AS-IS, WHERE-IS, WITH ALL FAULTS
+    CONDITION.
+    THE LIMITED WARRANTY IS NOT TRANSFERABLE AND NOT ASSIGNABLE BY BUYER TO ANY PERSON OR ENTITY AND IS PERSONAL TO
+    BUYER
+    ONLY. EXCEPT FOR THE LIMITED WARRANTY, ALL WARRANTIES, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO, ALL IMPLIED
+    WARRANTIES OF FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY OR HABITABILITY, WORKMANSHIP AND MATERIALS ARE
+    ABSOLUTELY
+    AND SPECIFICALLY DISCLAIMED BY BUILDER AND COMPLETELY EXCLUDED. THIS
+    <u>SECTION 9</u> IN ITS ENTIRETY SHALL EXPRESSLY SURVIVE THE CLOSING AND THE TERMINATION OF THIS CONTRACT.
+  </p>
+
+
+
+  <p>
+    <span class="section-subheader">B.
+      <u>Release of Liability</u>
+    </span>
+    <ol>
+      <li>IN THE EVENT BUYER ENTERS INTO THE CONSTRUCTION AREA OF THE HOUSE OR PROPERTY AT ANY TIME PRIOR TO CLOSING,
+        THEN BUYER
+        DOES SO AT BUYER’S OWN RISK, AND BUYER RELEASES AND DISCHARGES BUILDER, AND AGREES TO INDEMNIFY AND HOLD BUILDER
+        HARMLESS FROM ANY AND ALL CLAIMS FOR INJURIES OR DAMAGES TO PERSON OR PROPERTY THAT ARISE FROM ANY SUCH ENTRY
+        INTO
+        THE CONSTRUCTION AREA. BUYER SHALL NOT PLACE PERSONAL PROPERTY OR POSSESSIONS OF THE BUYER ON THE PROPERTY PRIOR
+        TO CLOSING AND ASSUMES ALL RISK AS TO THE LOSS OR DAMAGE OF SUCH ITEMS IF BUYER FAILS TO COMPLY WITH THIS
+        RESTRICTION.
+      </li>
+      <li>BUYER HAS EXAMINED, STUDIED, ACCEPTED, AND APPROVED THE CONTRACT AND THE CONSTRUCTION PLAN AND BUYER RELEASES
+        BUILDER
+        AND SHALL HOLD BUILDER HARMLESS FOR ANY DESIGN OR PLAN DEFECTS IN THE SAME. BUYER ACKNOWLEDGES THAT THE LIMITED
+        WARRANTIES,
+        DISCLAIMERS AND WAIVERS CONTAINED IN THIS CONTRACT ARE REASONABLE UNDER THE CIRCUMSTANCES AND FREELY ENTERED
+        INTO;
+        THAT BUYER AND BUILDER HAVE PARITY IN THIS CONTRACT; AND THAT THIS CONTRACT IS EQUITABLE AND EVEN-HANDED BETWEEN
+        BUYER AND BUILDER; THAT WITHOUT THE LIMITATIONS, DISCLAIMERS AND WAIVERS PROVIDED BY THIS CONTRACT, BUILDER
+        WOULD
+        NOT ENTER INTO THIS CONTRACT.
+      </li>
+    </ol>
+  </p>
+
+  <p class="section-header">Section 10.
+    <u>Termination</u>
+  </p>
+  <p>If Buyer fails to make any payment due or fails to comply with any other material obligation of this Contract,
+    Builder
+    at its sole option and without penalty is authorized to suspend work until payment is made and Buyer has fully
+    complied
+    with the terms of this Contract. In addition to the right to suspend work, if Buyer fails to make any payment due or
+    fails to comply with any other material obligation under this contract, Builder at its sole option, and unless
+    cured,
+    may terminate this Contract; provided that Builder shall provide written notice to Buyer of Builder’s intent to
+    terminate
+    this Contract and Buyer shall have seven (7) days from the effective date of the notice to remedy or cure all
+    breaches
+    listed in the notice. If Buyer fails to remedy or cure the breaches within the seven (7) days, this contract shall
+    terminate
+    immediately. Buyer shall be liable for and shall pay to
+
+
+    Builder all costs and expenses incurred to the date of termination,
+    inclusive of Change Order Fees, Price Request Fees, per diem charges, price increases, any other fees permitted by
+    this
+    Contract and liquidated damages (not as a penalty, since both parties acknowledge that it would be difficult, or
+    impossible,
+    to ascertain Builder’s damages or losses in the event of Buyer’s breach of this Contract). EXCEPT AS PROVIDED
+    HEREIN,
+    IN NO EVENT SHALL BUYER OR BUILDER BE LIABLE TO EACH OTHER FOR ANY PUNITIVE, SPECULATIVE, OR CONSEQUENTIAL DAMAGES
+    OF
+    ANY KIND.
+  </p>
+
+  <p class="section-header">Section 11.
+    <u>Miscellaneous</u>
+  </p>
+  <p>
+    <span class="section-subheader">A.
+      <u>Risk of Loss</u>
+    </span> Risk of loss to the Property from fire, casualty or other causes shall be on Builder until the earlier of
+    (i) transfer
+    of possession of the Property by Builder to Buyer, (ii) the Closing, or (iii) any occupancy of the Property by
+    Buyer.
+    Buyer acknowledges that if Buyer places any items of personal property or possessions on the Property prior to the
+    Closing,
+    Buyer has taken occupancy for purposes of this
+    <u>Section 11</u>. After the risk of loss is transferred to Buyer, Buyer shall be responsible for all insurance
+    related
+    to the Property and for all uninsured loss to the Property. If casualty by fire or otherwise, occurring prior to the
+    Closing, damages more than twenty percent (20%) of the Property, the Builder shall have the option to terminate this
+    Contract in writing and return to Buyer the Down Payment without interest. If Builder elects to terminate this
+    Contract
+    and complies with this
+    <u>Section 11A</u>, the Buyer shall have no other remedy for Builder’s failure to proceed to Closing and the parties
+    shall
+    each be released from all other obligations that may exist by virtue of this Contract, except for obligations that
+    expressly
+    survive termination of this Contract. In the event the damage exceeds twenty percent (20%) of the property and
+    Builder
+    does not give Buyer notice as set forth in this
+    <u>Section 11A</u> or the damage does not exceed twenty percent (20%), then Builder shall repair the damage and
+    rebuild
+    the Property as soon as reasonably practicable, and the Closing shall be delayed as necessary.
+  </p>
+
+  <p>
+    <span class="section-subheader">B.
+      <u>Waiver, Amendments, Entire Agreement</u>
+    </span> This Contract shall not be modified or amended or any of its terms waived except in writing signed by both
+    parties. The
+    failure of any party at any time or times to require performance of any provision of this Contact shall not affect
+    that party’s right at a later time to enforce the terms of this Contract. This Contract and the exhibits attached
+    hereto
+    set forth the entire understanding and agreement among the parties with respect to the subject matter herein and
+    supersedes
+    all prior agreements, arrangements and understandings, written or oral, relating to the subject matter herein.
+  </p>
+
+  <p>
+    <span class="section-subheader">C.
+      <u>No recordation</u>
+    </span> Buyer agrees not to file this Contract or any memorandum reflecting its terms with any clerk of any court or
+    any county
+    without the prior written permission of Builder. Buyer’s violation of this paragraph shall be a material breach of
+    this
+    Contract.
+  </p>
+
+  <p>
+    <span class="section-subheader">D.
+      <u>Artistic Presentation of Neighborhood; Future Homes</u>
+    </span> Subject to the restrictions filed of record, Builder may change the character, design and overall appearance
+    of future
+    homes it builds in the addition or neighborhood where the Property is located. Any artist’s drawing or artistic
+    presentation
+    of future improvements to the addition or neighborhood where the Property is located imposes no obligation on
+    Builder
+    to build any further improvements or to build improvements as shown on the artistic presentation.
+  </p>
+
+  <p>
+    <span class="section-subheader">E.
+      <u>Intellectual Property Rights</u>
+    </span> Builder does not guarantee or provide to Buyer any direct or implied ownership or exclusivity of plan,
+    design, features,
+    paint color schemes, ideas, or any other improvements implemented on the Property. Such improvements may already
+    exist
+    in homes previously built and may be implemented in future homes without any claim by, notification to, or consent
+    of
+    Buyer.
+  </p>
+
+  <p>
+    <span class="section-subheader">F.
+      <u>Use in Marketing</u>
+    </span> Builder reserves all right to the use of the Property, its improvements, features, ideas, and any other
+    implementations
+    as an example of Builder’s work for marketing to other potential clients until ownership of the Property is
+    transferred
+    to Buyer according to the terms of this Contract. Builder marketing may include, but is not limited to, personal
+    visits
+    by Builder and prospective clients, their agents or brokers, and other associates. After the Closing Date, Builder
+    reserves
+    all rights to use photos, video, and descriptions, including information about pricing, features, and
+    implementations
+    of the Property in any marketing materials, including but not limited to print and online media.
+  </p>
+
+
+
+
+
+  <p>
+    <span class="section-subheader">G.
+      <u>Homeowners Associations</u>
+    </span> Some additions have a homeowners association responsible for common areas and community improvements. The
+    plat restrictions
+    may require mandatory membership in the association and payment of mandatory dues. Any dues quoted by Builder are
+    estimates
+    only for the first year. Dues thereafter will be determined by the homeowners association. Copies of the homeowners
+    association’s
+    articles of incorporation and by-laws may be available at Builder’s main office, at the office of the homeowners
+    association
+    after the homeowners association has been activated, or from the appropriate governmental authority. The homeowners
+    association’s
+    by-laws and articles of incorporation contain provisions relating to the rights and responsibilities of the
+    homeowners
+    and contain other legal information that affect the homeowners. Buyers receive no rights to any green areas, parks
+    or
+    other common areas except for Buyer’s rights from mandatory membership in the homeowners association. Builder makes
+    no
+    representation or warranty regarding Builder’s contribution of land or improvements to any homeowners association. A
+    homeowners association may be obligated to the city where the Property is located or other township or city to
+    maintain
+    draining ways, drainage detention areas, entrance walls and landscaping, and section line right-of-way maintenance
+    and
+    all maintenance of any property owned by the homeowners association.
+  </p>
+
+  <p>
+    <span class="section-subheader">H.
+      <u>No Special Design Features</u>
+    </span> Unless this Contract expressly provides otherwise, the Property does not include any special features that
+    may be desired
+    by handicapped individuals. Builder has made no soil test for contaminants, no environmental studies or health
+    studies
+    in connection with the design or construction of the House, nor has Builder built the House to accommodate any
+    future
+    changes in climate or in the environment. The Builder has not built the House in such a way that it can be
+    remodeled,
+    and no walls, posts or beams should be moved or removed, nor should the House be subjected to any additional stress,
+    without consulting a professional engineer. Except to the extent required by applicable laws, the House has not been
+    specifically designed or built to withstand tornado-type winds or earthquakes. No soil tests have been conducted by
+    Builder
+    on the Property to determine the suitability of the soil for the foundation system for the House that will, or may
+    be
+    used. Windows and doors are not designed or installed by Builder to keep out intruders, nor have any measures been
+    taken
+    by Builder to make the House safe from criminal activity. Additionally, except for the termite treatment described
+    herein,
+    the House has not been designed to be termite, mold, fungus or mildew resistant in any way and BUILDER DISCLAIMS ANY
+    LIABILITY FOR DAMAGE OR INJURY RESULTING FROM THE UNINTENTIONAL INSTALLATION OR USE OF BUILDING MATERIALS THAT
+    CONTAIN
+    WOOD BORING INSECT EGGS, LARVAE OR ADULT INSECTS.
+  </p>
+
+  <p>
+    <span class="section-subheader">I.
+      <u>Ongoing Construction in Surrounding Areas</u>
+    </span> Buyer acknowledges that because Buyer may be purchasing the Property during a period in which construction
+    is or will
+    be occurring in the surrounding area, and that the Closing Date may be prior to the completion of other surrounding
+    homes,
+    there may be certain inconveniences until construction of surrounding homes is complete. Buyers waive all claims
+    that
+    they may have against Builder with respect thereto.
+  </p>
+
+  <p>
+    <span class="section-subheader">J.
+      <u>Mold, Mildew, Fungus, Radon, Environmental Pollutants, Pesticides and Building Material Component Notice to
+        Buyers</u>
+    </span>
+    Every new home is constructed with building materials that contain small, but measurable amounts of water, powders,
+    sol-
+    ids, industrial chemicals, and mold, mildew, fungi and the spores they produce. By way of example, and not
+    limitation,
+    formaldehyde is found in some carpeting and pressed wood products; arsenic is found in some treated wood products;
+    fiberglass
+    is found in some insulation products; petroleum, petroleum products and petroleum by-products are found in some
+    vinyl
+    and plastic products; and methylene chloride is found in some paint thinners. Also, the foundation of the House has
+    been
+    treated against termites using a pesticide. These substances may be toxic to, or produce an allergic or other
+    adverse
+    or unpleasant reaction, in some individuals. BUILDER DISCLAIMS ANY LIABILITY FOR DAMAGE OR INJURY RESULTING FROM
+    SUCH
+    SUBSTANCES and Buyer agrees to hold Builder, its agents, employees, representatives and assigns, harmless from any
+    or
+    all loss, damage, claim, injury, loss of income, emotional distress, death, loss of use, loss of value, adverse
+    health
+    effects or any other effects, illness, allergic reaction, or the like which Buyer, Buyer’s family, or invitees may
+    sustain
+    as a result of the presence these substances.
+  </p>
+
+  <p class="mb4">
+    <span class="section-subheader">K.
+      <u>Assignment</u>
+    </span> Buyer may not assign or transfer Buyer’s rights or obligations under this Contract without the prior written
+    consent
+    of Builder. Subject to the foregoing, this Contract shall inure to the benefit of and be binding upon the heirs,
+    personal
+    representatives, successors and assigns of the parties.
+  </p>
+
+
+
+
+
+  <p>
+    <span class="section-subheader">L.
+      <u>Miscellaneous</u>
+    </span> This Contract may be executed in one or more counterparts, each of which will be an original instrument, but
+    all of which
+    will constitute one agreement. Each term, provision, condition, and covenant contained in this Contract shall be
+    jointly
+    and severally binding on each of the Buyers. The section headings in this Contract are for reference purposes only
+    and
+    are not intended in any way to describe, interpret, define or limit the scope, extent or intent of this Contract or
+    any
+    party hereof. In case any one or more provisions contained in this Contract will for any reason be held to be
+    invalid,
+    illegal or unenforceable in any respect, such invalidity, illegality or unenforceability will not affect any other
+    provision
+    hereof, and this Contract will be construed as if such invalid, illegal or unenforceable provision had never been
+    contained
+    herein. This Contract shall be governed, construed and interpreted in accordance with the laws of the State of
+    Oklahoma.
+  </p>
+
+  <p class="mb6">
+    <span class="section-subheader">M.
+      <u>Notices</u>
+    </span> Unless this Contract expressly states otherwise, all notices required or permitted under this Contract shall
+    be sent
+    in writing and (i) delivered in person to such party or to an officer or agent of such party; (ii) sent by email;
+    (iii)
+    sent by a recognized overnight courier service; or (iv) sent by U.S. Postal Service certified mail, postage prepaid,
+    return receipt requested to the parties at their addresses stated above.
+  </p>
+
+  <br /><br /><br /><br /><br /><br />
+
+
+  <div style="height: 10.3in;">
+    <p>
+      <span class="section-subheader">N.
+        <u>Special Provisions</u>
+      </span>
+    </p>
+    <div class="variable-line-special h5">{{data.special_provisions}}</div>
+  </div>
+
+
+
+
+
+  <div style="height: 10.3in;" class="pt5">
+    <p class="section-header mb6">AGREED AND ACCEPTED</p>
+
+    <div class="cf">
+      <div class="fl w-50 pr3">
+
+        <div class="cf">
+          <div class="fl w-70 pr2">
+
+            <div class="bt bw1 w-100 mb1"></div>
+            {{data.seller_entity}}
+          </div>
+          <div class="fl w-30 pl2">
+            <div class="bt bw1 w-100 mb1"></div>
+            Date
+          </div>
+
+        </div>
+      </div>
+      <div class="fl w-50 pl3">
+
+        <div class="mb5">
+          <div class="bt bw1 w-100 mb1"></div>
+          Print: Buyer’s Name as Taking Title
+        </div>
+
+        <div class="cf mb6">
+          <div class="fl w-70 pr2">
+            <div class="bt bw1 w-100 mb1"></div>
+            Buyer’s Signature
+          </div>
+          <div class="fl w-30 pl2">
+            <div class="bt bw1 w-100 mb1"></div>
+            Date
+          </div>
+        </div>
+
+        <div class="mb5">
+          <div class="bt bw1 w-100 mb1"></div>
+          Print: Buyer’s Name as Taking Title
+        </div>
+
+        <div class="cf">
+          <div class="fl w-70 pr2">
+            <div class="bt bw1 w-100 mb1"></div>
+            Buyer’s Signature
+          </div>
+          <div class="fl w-30 pl2">
+            <div class="bt bw1 w-100 mb1"></div>
+            Date
+          </div>
+        </div>
+
+
+
+      </div>
+    </div>
+
+
+  </div>
+
+
+
+</body>
+
+</html>

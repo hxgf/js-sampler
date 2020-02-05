@@ -1,0 +1,394 @@
+<html>
+	<head>
+
+		<title>Edit Profile</title>
+
+		<link rel="stylesheet" href="./css/style-profiles.css" type="text/css" media="screen" />
+		<link rel="stylesheet" href="./css/dropzone.css" type="text/css" media="screen" />
+
+		<script type="text/javascript" src="./js/jquery-1.11.3.min.js"></script>
+		<script type="text/javascript" src="./js/handlebars.min.js"></script>
+		<script type="text/javascript" src="./js/profiles-utility.js"></script>	
+
+		<script type="text/javascript" src="./js/dropzone.js"></script>
+
+	</head>
+	<body>
+
+
+	
+		<div id="profiles-content"></div>
+
+		<script id="template-creating" type="text/x-handlebars-template">
+			<h3 class="feedback">Creating your profile... <i>(please wait)</i></h3>
+		</script>
+		
+		<script id="template" type="text/x-handlebars-template">
+	
+
+{{#if can_edit}}
+	<div class="profile-edit">
+		<form id="profile-edit-form">
+			<div class="col">
+				<div class="details">
+					<h2>{{name}}{{#if apprentice_participation}}&nbsp;&nbsp;<small><i>Apprentice Trainer</i></small>{{/if}}</h2>	
+					{{#if alt_address}}
+						<h3>{{alt_address}}</h3>
+						{{#if alt_country_name}}
+							<h3>{{alt_city}}, {{alt_country_name}}</h3>
+						{{else}}					
+							<h3>{{alt_city}}, {{alt_state}} &nbsp;{{alt_zip}}</h3>
+						{{/if}}
+					{{else}}
+						<h3>{{address}}</h3>
+						{{#is country_code "==" "US"}}
+							<h3>{{city}}, {{state}} &nbsp;{{zip}}</h3>
+						{{else}}
+							<h3>{{city}}, {{country_name}}</h3>
+						{{/is}}
+					{{/if}}
+					{{#if alt_phone}}
+						<h5>{{alt_phone}}</h5>
+					{{else}}
+						{{#if phone_home}}<h5>{{phone_home}} (home)</h5>{{/if}}
+						{{#if phone_mobile}}<h5>{{phone_mobile}} (mobile)</h5>{{/if}}
+					{{/if}}
+					{{#if url}}
+						<h5><a href="{{url_formatted}}"></a></h5>
+					{{/if}}
+					{{#if email}}
+						<h5><a href="mailto:{{email}}">{{email}}</a></h5>
+					{{/if}}
+					<br /><h6>This is your advanced Profile.<br /> 
+					<a href="./profile.html?profile={{url_title}}">Click here</a> to view your advanced profile.</h6>
+				</div>				
+			</div>
+			<div class="col">
+				<div class="field">
+					<label><b>Logo image of your business:</b></label>
+						<div class="upload-preview">
+							{{#if photo}}<img src="{{photo}}" />{{/if}}
+						</div>
+						<div class="thumb-upload">
+							<div class="dropzone" id="dropzone"></div>
+							<div class="upload-instructions">* images will be displayed at 72 dpi and appear no wider than 350 pixels</div>
+						</div>
+				</div>
+				<br /><br />
+				<div class="field">
+					<label>Include a video from YouTube or Vimeo</label>
+					<input type="text" name="video_url" value="{{video_url}}" />
+				</div>
+			</div>
+			<br /><br />
+			<div class="field">
+				Please &nbsp;&nbsp;
+				<label class="inline"><input type="radio" name="profile_visible" {{#if profile_visible}}checked="true"{{/if}} value="include" /> include</label> &nbsp;&nbsp;
+				<label class="inline"><input type="radio" name="profile_visible" {{#unless profile_visible}}checked="true"{{/unless}} value="do not include" /> do not include</label>
+				&nbsp;&nbsp;&nbsp;
+				my Pro Profile on our Find A Pro map.
+			</div>
+			<h5>Alternate contact information <br /><small>* This is only necessary if you want your profile contact information<br /> to be different from your member information.</small></h5>
+			<div class="field inline30">
+				<label>Address</label>
+				<input type="text" name="alt_address" value="{{alt_address}}" />
+			</div>
+			<div class="field inline30">
+				<label>City</label>
+				<input type="text" name="alt_city" value="{{alt_city}}" />
+			</div>
+			<div class="field inline30">
+				<label>State</label>
+				<input type="text" class="short" name="alt_state" value="{{alt_state}}" />
+			</div>
+			<div class="field inline30">
+				<label>Country <small>(if outside USA)</small></label>
+				<input type="text" name="alt_country_name" value="{{alt_country_name}}" />
+			</div>
+			<div class="field inline30">
+				<label>Zip Code</label>
+				<input type="text" name="alt_zip" value="{{alt_zip}}" />
+			</div>
+			<div class="field">
+				<label>Phone</label>
+				<input type="text" name="alt_phone" value="{{alt_phone}}" />
+			</div>	
+			<h5>Professional services offered:</h5>		
+			<div class="field">
+				<label>Description of your facility and/or training program &nbsp;&nbsp;&nbsp;&nbsp;<small>* Limit 1,000 Characters</small></label>
+				<textarea name="bio" maxlength="1000">{{bio}}</textarea>
+			</div>
+			<div class="field">
+				<label>Professional Services Offered:</label>
+				<ul class="checklist-columns">
+					<li><label class="inline"><input type="checkbox" {{#if_contains professional_services 'Colt Starting'}}checked="checked"{{/if_contains}} name="professional_services[]" value="Colt Starting" /> Colt Starting</label></li>
+					<li><label class="inline"><input type="checkbox" {{#if_contains professional_services 'Futurity Prospects (2-3 year olds)'}}checked="checked"{{/if_contains}} name="professional_services[]" value="Futurity Prospects (2-3 year olds)" /> Futurity Prospects (2-3 year olds)</label></li>
+					<li><label class="inline"><input type="checkbox" {{#if_contains professional_services 'Derby Prospects (4-6 year olds)'}}checked="checked"{{/if_contains}} name="professional_services[]" value="Derby Prospects (4-6 year olds)" /> Derby Prospects (4-6 year olds)</label></li>
+					<li><label class="inline"><input type="checkbox" {{#if_contains professional_services 'Open Horses (7 year old and older)'}}checked="checked"{{/if_contains}} name="professional_services[]" value="Open Horses (7 year old and older)" /> Open Horses (7 year old and older)</label></li>		
+					<li><label class="inline"><input type="checkbox" {{#if_contains professional_services 'Category 1 Horses'}}checked="checked"{{/if_contains}} name="professional_services[]" value="Category 1 Horses" /> Category 1 Horses</label></li>		
+					<li><label class="inline"><input type="checkbox" {{#if_contains professional_services 'Problem Horses'}}checked="checked"{{/if_contains}} name="professional_services[]" value="Problem Horses" /> Problem Horses</label></li>
+					<li><label class="inline"><input type="checkbox" {{#if_contains professional_services 'Clinics Provided'}}checked="checked"{{/if_contains}} name="professional_services[]" value="Clinics Provided" /> Clinics Provided</label></li>
+					<li><label class="inline"><input type="checkbox" {{#if other_professional_services}}checked="checked"{{/if}} name="professional_services[]" value="other" /> Other:</label> &nbsp;<input type="text" class="short"  name="other_professional_services" value="{{other_professional_services}}" /></li>
+				</ul>
+			</div>
+			<div class="field">
+				<label>Student Riders Accepted:</label>
+				<ul class="checklist-columns">
+					<li><label class="inline"><input type="checkbox" {{#if_contains types_students 'Never Ridden'}}checked="checked"{{/if_contains}} name="types_students[]" value="Never Ridden" /> Never Ridden</label></li>
+					<li><label class="inline"><input type="checkbox" {{#if_contains types_students 'Beginner'}}checked="checked"{{/if_contains}} name="types_students[]" value="Beginner" /> Beginner</label></li>					
+					<li><label class="inline"><input type="checkbox" {{#if_contains types_students 'Intermediate'}}checked="checked"{{/if_contains}} name="types_students[]" value="Intermediate" /> Intermediate</label></li>					
+					<li><label class="inline"><input type="checkbox" {{#if_contains types_students 'Advanced'}}checked="checked"{{/if_contains}} name="types_students[]" value="Advanced" /> Advanced</label></li>		
+					<li><label class="inline"><input type="checkbox" {{#if_contains types_students 'IEA Lessons'}}checked="checked"{{/if_contains}} name="types_students[]" value="IEA Lessons" /> IEA Lessons</label></li>
+					<li><label class="inline"><input type="checkbox" {{#if_contains types_students 'IHSA Lessons'}}checked="checked"{{/if_contains}} name="types_students[]" value="IHSA Lessons" /> IHSA Lessons</label></li>
+					<li><label class="inline"><input type="checkbox" {{#if_contains types_students 'NCEA Lessons'}}checked="checked"{{/if_contains}} name="types_students[]" value="NCEA Lessons" /> NCEA Lessons</label></li>
+					<li><label class="inline"><input type="checkbox" {{#if_contains types_students 'NCAA Lessons'}}checked="checked"{{/if_contains}} name="types_students[]" value="NCAA Lessons" /> NCAA Lessons</label></li>
+				</ul>
+			</div>
+			<div class="field">
+				<label>Types of Lessons Provided:</label>
+				<ul class="checklist-columns">
+					<li><label class="inline"><input type="checkbox" {{#if_contains types_lessons 'Open'}}checked="checked"{{/if_contains}} name="types_lessons[]" value="Open" /> Open</label></li>					
+					<li><label class="inline"><input type="checkbox" {{#if_contains types_lessons 'Non Pro'}}checked="checked"{{/if_contains}} name="types_lessons[]" value="Non Pro" /> Non Pro</label></li>
+					<li><label class="inline"><input type="checkbox" {{#if_contains types_lessons 'Youth'}}checked="checked"{{/if_contains}} name="types_lessons[]" value="Youth" /> Youth</label></li>					
+					<li><label class="inline"><input type="checkbox" {{#if_contains types_lessons 'Freestyle'}}checked="checked"{{/if_contains}} name="types_lessons[]" value="Freestyle" /> Freestyle</label></li>
+					<li><label class="inline"><input type="checkbox" {{#if_contains types_lessons 'Rookie'}}checked="checked"{{/if_contains}} name="types_lessons[]" value="Rookie" /> Rookie</label></li>					
+					<li><label class="inline"><input type="checkbox" {{#if_contains types_lessons 'Green/Entry Level'}}checked="checked"{{/if_contains}} name="types_lessons[]" value="Green/Entry Level" /> Green/Entry Level</label></li>
+					<li><label class="inline"><input type="checkbox" {{#if other_types_lessons}}checked="checked"{{/if}} name="types_lessons[]" value="other" /> Other:</label> &nbsp;<input type="text" class="short"  name="other_types_lessons" value="{{other_types_lessons}}" /></li>
+				</ul>
+			</div>
+			<div class="field">
+				<label>Do you have lesson horses available?</label>
+				<label class="inline"><input type="radio" name="horses_available" {{#if horses_available}}checked="checked"{{/if}} value="Yes" /> Yes</label> &nbsp;&nbsp;
+				<label class="inline"><input type="radio" name="horses_available" {{#unless horses_available}}checked="checked"{{/unless}} value="No" /> No</label>
+			</div>
+			<div class="field">
+				<label>Do you prepare horses for sales?</label>
+				<label class="inline"><input type="radio" name="horses_outside" {{#if horses_outside}}checked="checked"{{/if}} value="Yes" /> Yes</label> &nbsp;&nbsp;
+				<label class="inline"><input type="radio" name="horses_outside" {{#unless horses_outside}}checked="checked"{{/unless}} value="No" /> No</label>
+			</div>
+			<h5>About Your Professional Relationships & Certifications:</h5>
+			<div class="field">
+				<label>With what other Association do you hold Memberships?</label>
+				<ul class="checklist-columns">
+					<li><label class="inline"><input type="checkbox" {{#if_contains professional_accreditations 'AQHA'}}checked="checked"{{/if_contains}} name="professional_accreditations[]" value="AQHA" /> AQHA</label></li>					
+					<li><label class="inline"><input type="checkbox" {{#if_contains professional_accreditations 'NRCHA'}}checked="checked"{{/if_contains}} name="professional_accreditations[]" value="NRCHA" /> NRCHA</label></li>
+					<li><label class="inline"><input type="checkbox" {{#if_contains professional_accreditations 'APHA'}}checked="checked"{{/if_contains}} name="professional_accreditations[]" value="APHA" /> APHA</label></li>					
+					<li><label class="inline"><input type="checkbox" {{#if_contains professional_accreditations 'NCHA'}}checked="checked"{{/if_contains}} name="professional_accreditations[]" value="NCHA" /> NCHA</label></li>
+					<li><label class="inline"><input type="checkbox" {{#if other_professional_accreditations}}checked="checked"{{/if}} name="professional_accreditations[]" value="other" /> Other:</label> &nbsp;<input type="text" class="short"  name="other_professional_accreditations" value="{{other_professional_accreditations}}" /></li>
+				</ul>
+			</div>		
+			<div class="field">
+				<label>Would you participate in the Apprentice Program?</label>
+				<label class="inline"><input type="radio" name="apprentice_participation" {{#if apprentice_participation}}checked="checked"{{/if}} value="Yes" /> Yes</label> &nbsp;&nbsp;
+				<label class="inline"><input type="radio" name="apprentice_participation" {{#unless apprentice_participation}}checked="checked"{{/unless}} value="No" /> No</label>
+			</div>
+			<div class="field">
+				<label>With what associations do you hold a Judges card?</label>
+				<ul class="checklist-columns">
+					<li><label class="inline"><input type="checkbox" {{#if_contains official_judge 'NRHA'}}checked="checked"{{/if_contains}} name="official_judge[]" value="NRHA" /> NRHA</label></li>					
+					<li><label class="inline"><input type="checkbox" {{#if_contains official_judge 'AQHA'}}checked="checked"{{/if_contains}} name="official_judge[]" value="AQHA" /> AQHA</label></li>					
+					<li><label class="inline"><input type="checkbox" {{#if_contains official_judge 'NRCHA'}}checked="checked"{{/if_contains}} name="official_judge[]" value="NRCHA" /> NRCHA</label></li>					
+					<li><label class="inline"><input type="checkbox" {{#if_contains official_judge 'APHA'}}checked="checked"{{/if_contains}} name="official_judge[]" value="APHA" /> APHA</label></li>					
+					<li><label class="inline"><input type="checkbox" {{#if_contains official_judge 'NCHA'}}checked="checked"{{/if_contains}} name="official_judge[]" value="NCHA" /> NCHA</label></li>		
+					<li><label class="inline"><input type="checkbox" {{#if other_official_judge}}checked="checked"{{/if}} name="official_judge[]" value="other" /> Other:</label> &nbsp;<input type="text" class="short"  name="other_official_judge" value="{{other_official_judge}}" /></li>
+				</ul>
+			</div>
+			<div class="field">
+				<label>What languages do you speak?</label>
+				<ul class="checklist-columns">
+					<li><label class="inline"><input type="checkbox" {{#if_contains languages 'English'}}checked="checked"{{/if_contains}} name="languages[]" value="English" /> English</label></li>					
+					<li><label class="inline"><input type="checkbox" {{#if_contains languages 'Spanish'}}checked="checked"{{/if_contains}} name="languages[]" value="Spanish" /> Spanish</label></li>	
+					<li><label class="inline"><input type="checkbox" {{#if_contains languages 'Italian'}}checked="checked"{{/if_contains}} name="languages[]" value="Italian" /> Italian</label></li>
+					<li><label class="inline"><input type="checkbox" {{#if_contains languages 'German'}}checked="checked"{{/if_contains}} name="languages[]" value="German" /> German</label></li>
+					<li><label class="inline"><input type="checkbox" {{#if other_languages}}checked="checked"{{/if}} name="languages[]" value="other" /> Other:</label> &nbsp;<input type="text" class="short"  name="other_languages" value="{{other_languages}}" /></li>
+				</ul>
+			</div>
+			<div class="field">
+				<label class="inline">Years as a trainer:</label>
+				&nbsp;<input type="text" class="short" name="years_trainer" value="{{years_trainer}}" />
+			</div>
+			<div class="field">
+				<label class="inline">Years in reining:</label>
+				&nbsp;<input type="text" class="short" name="years_reining" value="{{years_reining}}" />
+			</div>
+			<div class="field">
+				<label class="inline">Years as a riding instructor:</label>
+				&nbsp;<input type="text" class="short" name="years_instructor" value="{{years_instructor}}" />
+			</div>
+			<div class="field">
+				<label class="inline">Years at current location:</label>
+				&nbsp;<input type="text" class="short" name="years_location" value="{{years_location}}" />
+			</div>
+			<div class="field">
+				<label>Other disciplines you train in:</label>
+				<textarea name="other_disciplines" maxlength="255">{{other_disciplines}}</textarea>
+			</div>
+			<div class="field notice">
+				By clicking save, you attest that the information provided is accurate to the best of your knowledge.  Your profile will immediately be available to the public. Anything listed fraudulently, inappropriately, illegally or vulgar will be subject to immediate deletion, as well as possible fines and/or suspension.
+			</div>
+			<input type="hidden" name="photo" />
+			<input type="hidden" name="preview" />
+		</form>
+		<button id="button-save">Save</button> &nbsp;&nbsp;
+		<button id="button-cancel">Cancel</button> &nbsp;&nbsp; 
+		<button id="button-preview">Preview</button> &nbsp;&nbsp;
+	</div>
+{{else}}
+	<h3 class="feedback">You are not authorized to edit this profile.</h3>
+{{/if}}
+
+		</script>
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+
+	// /edit.html?member_id=123456&member_pin=1444&member_token=123456123456
+
+	// parse query string
+	var query_string = utility.query_string();
+
+
+
+	if (query_string['action'] == 'create'){
+
+		utility.render_template("#template-creating", {});
+
+	  utility.api_request({
+	    endpoint: 'utility/profile-create',
+	    data: {
+				member_id: query_string['member_id'],
+				member_pin: query_string['member_pin'],
+				member_token: query_string['member_token'],
+	    },
+	    callback: function(api_data){
+		    window.location.href = './edit.html?member_id=' + query_string['member_id']+'&member_pin='+query_string['member_pin']+'&member_token='+query_string['member_token'];
+			}
+		});
+					
+	}else{
+
+		// fetch data from api
+	  utility.api_request({
+	    endpoint: 'profile-edit',
+	    data: {
+				member_id: query_string['member_id'],
+				member_pin: query_string['member_pin'],
+				member_token: query_string['member_token'],
+	    },
+	    callback: function(api_data){
+	
+				// render the template			
+				utility.render_template("#template", api_data);
+	
+				// set the page title
+				document.title = "Edit Profile - " + api_data.name;
+	
+				// set the photo upload handler
+				Dropzone.autoDiscover = false;
+				var dz = new Dropzone("#dropzone", {
+					url: "http://profiles.nrha1.com/api/upload-photo/" + api_data.member_id,
+					uploadMultiple: false,
+					addRemoveLinks: true,
+					dictCancelUpload: "",
+					dictRemoveFile: "",
+					previewTemplate:
+					'<div class="dz-preview dz-file-preview">'+
+					'<div class="dz-details">'+
+					'<div class="dz-filename"><span data-dz-name></span><input type="hidden" name="filename"></input></div>'+
+					'</div>'+
+					'<div class="dz-progress"><span class="dz-upload" data-dz-uploadprogress></span></div>'+
+					'<div class="dz-error-message"><span data-dz-errormessage></span></div>'+
+					'</div>',
+				});
+				dz.on("complete", function (file) {
+				  var res = $.parseJSON(file.xhr.response);		
+					if (res.preview_url){
+						$(".upload-preview").html('<img src="'+res.preview_url+'" />');
+						$(".thumb-upload").hide();
+					}
+				  if (res.error){
+				    alert(res.errorMsg);
+				    dz.removeAllFiles();
+				  }
+				});
+	
+				// handle save button
+				$("#button-save").click(function(){
+					if ($(".dz-filename span").length !== 0){
+						$("input[name='photo']").val('new');
+					}
+	        $(".dz-filename span").each(function(){
+	          $(this).siblings("input[name='filename']").val(
+	            $(this).text()
+	          );
+	        }).promise().done( function(){
+					  utility.api_request({
+					    endpoint: 'profile-save',
+					    data: {
+								member_id: query_string['member_id'],
+								member_pin: query_string['member_pin'],
+								member_token: query_string['member_token'],
+								form: $("form#profile-edit-form").serialize()
+					    },
+					    callback: function(api_data){
+						    window.location.href = './profile.html?name=' + api_data.url_title;
+					    }
+					  });
+	
+				  });
+				});
+		
+				// handle preview button
+				$("#button-preview").click(function(){
+					if ($(".dz-filename span").length !== 0){
+						$("input[name='photo']").val('new');
+					}
+	        $(".dz-filename span").each(function(){
+	          $(this).siblings("input[name='filename']").val(
+	            $(this).text()
+	          );
+	        }).promise().done( function(){
+					  utility.api_request({
+					    endpoint: 'profile-save',
+					    data: {
+								member_id: query_string['member_id'],
+								member_pin: query_string['member_pin'],
+								member_token: query_string['member_token'],
+								form: $("form#profile-edit-form").serialize(),
+								preview: true
+					    },
+					    callback: function(api_data){
+						    var redirect = './profile.html?name=' + api_data.url_title + '&preview=true';
+								window.open(redirect, '_blank');
+					    }
+					  });
+					});
+				});
+				
+				// handle cancel button			
+				$("#button-cancel").click(function(){
+			    window.history.back();
+				});
+	
+	    }
+	  });
+		
+	}
+
+
+</script>
+
+
+
+	</body>
+</html>

@@ -1,0 +1,343 @@
+<form id="marketing-edit" class="ui form pe-block">
+
+	<h3 class="ui header">Marketing Data</h3>
+
+	<div class="ui two column relaxed grid">
+		<div class="column marketing-data-l">
+			<div class="field">
+				<label>Tagline</label>
+				{{input type="text" name="tagline" value=model.marketing_data.tagline}}
+			</div>
+
+			<div class="field">
+				<label>Video Tour URL</label>
+				{{input type="text" name="video_url" value=model.marketing_data.video_url}}
+			</div>
+		</div>
+
+		<div class="column">
+			<div class="field">
+				<label>Virtual Tour URL</label>
+				{{input type="text" name="tour_url" value=model.marketing_data.tour_url}}
+			</div>
+			<div class="field">
+
+			</div>
+		</div>
+	</div>
+
+
+	<div class="ui section divider"></div>
+
+
+	<h3 class="ui header">Description (Web Text)</h3>
+
+	{{textarea id="description" class="textarea" name="description" value=model.marketing_data.description}}
+
+	<div class="b mv3">Image Code Snippets:</div>
+
+	<div class="cf">
+		<span class="db fl mr2 mb2 f6 white pointer bg-black-60 pa2" {{action 'code_snippets' "4-thumbs"}}>Row of 4 Thumbs</span>
+		<span class="db fl mr2 mb2 f6 white pointer bg-black-60 pa2" {{action 'code_snippets' "half-left"}}>Half-width Image (Left)</span>
+		<span class="db fl mr2 mb2 f6 white pointer bg-black-60 pa2" {{action 'code_snippets' "half-right"}}>Half-width Image (Right)</span>
+		<span class="db fl mr2 mb2 f6 white pointer bg-black-60 pa2" {{action 'code_snippets' "half-half"}}>2 Half-width Images</span>
+		<span class="db fl mr2 mb2 f6 white pointer bg-black-60 pa2" {{action 'code_snippets' "full-width-caption"}}>Full-width Image w/ Caption</span>
+		<span class="db fl mr2 mb2 f6 white pointer bg-black-60 pa2" {{action 'code_snippets' "pull-quote"}}>Pull Quote</span>
+	</div>
+
+	<div class="ui section divider"></div>
+
+
+
+	<div class="ui two column grid">
+
+		<div class="column radio-list">
+			<h3 class="ui header">Availability</h3>
+			<input type="radio" name="availability" value="" id="availability_none" {{bind-attr checked=model.availability_none}} /><label for="availability_none">Not Available</label><br />
+			<input type="radio" name="availability" value="coming_soon" id="availability_sold" {{bind-attr checked=model.availability_soon}} /><label for="availability_soon">Coming Soon</label><br />
+			<input type="radio" name="availability" value="pre_owned" id="availability_pre_owned" {{bind-attr checked=model.availability_pre_owned}} /><label for="availability_pre_owned">Pre-Owned</label><br />
+			<input type="radio" name="availability" value="sold" id="availability_sold" {{bind-attr checked=model.availability_sold}} /><label for="availability_sold">Sold</label><br />
+			<input type="radio" name="availability" value="contract_pending" id="availability_contract_pending" {{bind-attr checked=model.availability_contract_pending}} /><label for="availability_contract_pending">Contract Pending</label><br />
+			<input type="radio" name="availability" value="sale_new" id="availability_sale_new" {{bind-attr checked=model.availability_sale_new}} /><label for="availability_sale_new">For Sale (New)</label><br />
+			<input type="radio" name="availability" value="sale_pre" id="availability_sale_pre" {{bind-attr checked=model.availability_sale_pre}} /><label for="availability_sale_pre">For Sale (Pre-Owned)</label><br />
+		</div>
+
+		<div class="column">
+			<h3 class="ui header">Display Options</h3>
+			<div class="checkbox-list">
+				<input type="checkbox" id="marketing_index_include" name="index_include" {{bind-attr checked=model.marketing_data.index_include}} /> <label for="marketing_index_include">Show in homes index</label><br />
+				<input type="checkbox" id="marketing_showcase" name="showcase" {{bind-attr checked=model.marketing_data.showcase}} /> <label for="marketing_showcase">Showcase Home</label><br />
+				<input type="checkbox" id="marketing_urbana" name="urbana" {{bind-attr checked=model.marketing_data.urbana}} /> <label for="marketing_urbana">Urbana Series Home</label><br />
+				<input type="checkbox" id="marketing_xv" name="xv" {{bind-attr checked=model.marketing_data.xv}} /> <label for="marketing_xv">XV Series Home</label><br />
+				<input type="checkbox" id="marketing_default" name="homes_default" {{bind-attr checked=model.marketing_data.homes_default}} /> <label for="marketing_default">Default Available Home</label><br />
+				<input type="checkbox" id="marketing_model" name="model" {{bind-attr checked=model.marketing_data.model}} /> <label for="marketing_model">Current Model Home</label>
+			</div>
+		</div>
+
+
+	</div>
+
+
+
+
+	<div class="ui section divider"></div>
+
+
+
+	<h3 class="ui header">Photo Gallery <span class="o-60 fw1 f6 ml3">{{#link-to 'project-gallery-manage' model.project_id}}<i class="fas fa-external-link-alt mr1"></i>Sort Photos{{/link-to}}</span></h3>
+
+	<div class="sortable" style="overflow: auto;">
+
+		{{#each model.gallery_photos}}
+			<div {{bind-attr data-id=_id}} class="item gallery-item" style="cursor:move; padding: 0.5rem 0.5rem 0 0.5rem; display: block; float: left; width:15%; background-color: #efefef; margin: 0.25rem; position: relative;">
+				<img style="width: 100%; height: auto; display: block; margin-bottom: 0.5rem;" {{bind-attr src=path_thumbnail}} />
+				<div {{action 'edit_photo' _id}} class="edit" style="background: #000; color: #fff; font-weight: bold; padding: 0.5rem; padding-right: 0.3rem; position: absolute; top: 10px; right: 40px"><i class="far fa-edit"></i></div>
+				<div class="delete" style="background: #000; color: #fff; font-weight: bold; font-size: 150%; padding: 0.25rem 0.5rem; position: absolute; top: 10px; right: 10px" {{bind-attr data-delete-id=_id}}>x</div>
+				{{input type="hidden" name="gallery_id[]" value=_id}}
+				<label class="db pt0 mb0 pointer"><input type="checkbox" class="mb0" name="status_construction[]" {{bind-attr value=_id}} {{bind-attr checked=status_construction}} /> <span style="font-size: 70%;">Construction</span></label>
+				<label class="db pt0 mb0 pointer"><input type="checkbox" class="mb0" name="status_hidden[]" {{bind-attr value=_id}} {{bind-attr checked=status_hidden}} /> <span style="font-size: 70%;">Hidden (public)</span></label>
+			</div>
+
+		{{/each}}
+
+	</div>
+
+
+	<br /><br />
+
+
+	<script type="text/template" id="qq-template">
+		<div class="qq-uploader-selector qq-uploader qq-gallery" qq-drop-area-text="Drop files here">
+				<div class="qq-total-progress-bar-container-selector qq-total-progress-bar-container">
+						<div role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" class="qq-total-progress-bar-selector qq-progress-bar qq-total-progress-bar"></div>
+				</div>
+				<div class="qq-upload-drop-area-selector qq-upload-drop-area" qq-hide-dropzone>
+						<span class="qq-upload-drop-area-text-selector"></span>
+				</div>
+				<div class="qq-upload-button-selector qq-upload-button">
+						<div>Upload photos</div>
+				</div>
+				<span class="qq-drop-processing-selector qq-drop-processing">
+						<span>Processing dropped files...</span>
+						<span class="qq-drop-processing-spinner-selector qq-drop-processing-spinner"></span>
+				</span>
+				<div class="qq-upload-button-selector cb-add-photos-to-gallery mt0 mb3" style="display: none;">
+						<div>Add photos to gallery</div>
+				</div>
+				<ul class="qq-upload-list-selector qq-upload-list" role="region" aria-live="polite" aria-relevant="additions removals">
+						<li>
+								<span role="status" class="qq-upload-status-text-selector qq-upload-status-text"></span>
+								<div class="qq-progress-bar-container-selector qq-progress-bar-container">
+										<div role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" class="qq-progress-bar-selector qq-progress-bar"></div>
+								</div>
+								<span class="qq-upload-spinner-selector qq-upload-spinner"></span>
+								<div class="qq-thumbnail-wrapper">
+										<img class="qq-thumbnail-selector" qq-max-size="120" qq-server-scale>
+								</div>
+								<button type="button" class="qq-upload-cancel-selector qq-upload-cancel">X</button>
+								<button type="button" class="qq-upload-retry-selector qq-upload-retry">
+										<span class="qq-btn qq-retry-icon" aria-label="Retry"></span>
+										Retry
+								</button>
+								<div class="qq-file-info">
+										<div class="qq-file-name">
+												<span class="qq-upload-file-selector qq-upload-file"></span>
+												<span class="qq-edit-filename-icon-selector qq-btn qq-edit-filename-icon" aria-label="Edit filename"></span>
+										</div>
+										<input class="qq-edit-filename-selector qq-edit-filename" tabindex="0" type="text">
+										<span class="qq-upload-size-selector qq-upload-size"></span>
+										<button type="button" class="qq-btn qq-upload-delete-selector qq-upload-delete">
+												<span class="qq-btn qq-delete-icon" aria-label="Delete"></span>
+										</button>
+										<button type="button" class="qq-btn qq-upload-pause-selector qq-upload-pause">
+												<span class="qq-btn qq-pause-icon" aria-label="Pause"></span>
+										</button>
+										<button type="button" class="qq-btn qq-upload-continue-selector qq-upload-continue">
+												<span class="qq-btn qq-continue-icon" aria-label="Continue"></span>
+										</button>
+								</div>
+						</li>
+				</ul>
+				<dialog class="qq-alert-dialog-selector">
+						<div class="qq-dialog-message-selector"></div>
+						<div class="qq-dialog-buttons">
+								<button type="button" class="qq-cancel-button-selector">Close</button>
+						</div>
+				</dialog>
+				<dialog class="qq-confirm-dialog-selector">
+						<div class="qq-dialog-message-selector"></div>
+						<div class="qq-dialog-buttons">
+								<button type="button" class="qq-cancel-button-selector">No</button>
+								<button type="button" class="qq-ok-button-selector">Yes</button>
+						</div>
+				</dialog>
+				<dialog class="qq-prompt-dialog-selector">
+						<div class="qq-dialog-message-selector"></div>
+						<input type="text">
+						<div class="qq-dialog-buttons">
+								<button type="button" class="qq-cancel-button-selector">Cancel</button>
+								<button type="button" class="qq-ok-button-selector">Ok</button>
+						</div>
+				</dialog>
+		</div>
+	</script>
+
+
+
+	<div id="fine-uploader"></div>
+
+
+	<div id="fine-processing" style="font-size: 150%; color: rgba(0,0,0,0.6); font-style: italic; display: none;">
+		New photos are being processed and will be available shortly...
+	</div>
+
+
+
+	<div class="ui section divider"></div>
+
+
+
+	<h3 class="ui header">Print Flier &mdash; Description</h3>
+
+	{{textarea id="description_flier" class="textarea" name="description_flier" value=model.marketing_data.description_flier}}
+
+
+
+
+	<h3 class="ui header">Print Flier &mdash; Highlight Photos</h3>
+
+	<div class="ui three column relaxed grid">
+		<div class="column field">
+			<label>Highlight 1 &nbsp; <small>(primary image)</small></label>
+			<div class="upload-container-thumb marketing-highlight mh-1">
+				{{#if model.marketing_data.highlight_1}}
+				<img {{bind-attr src=model.marketing_data.highlight_1}} />
+				{{else}}
+				<img src="//s3.amazonaws.com/clickbuild/images/thumbnail-default-picture.png" />
+				{{/if}}
+				<button {{action 'upload_photo' "1"}} class="thumb-upload-button"><i class="ui cloud upload icon"></i> upload image</button>
+				<div class="thumb-upload">
+					<div class="dropzone" id="dropzone_photo_1"></div>
+					<div class="upload-button needsclick"></div>
+					<div class="upload-instructions"></div>
+				</div>
+			</div>
+		</div>
+
+		<div class="column field">
+			<label>Highlight 2</label>
+			<div class="upload-container-thumb marketing-highlight mh-2">
+				{{#if model.marketing_data.highlight_2}}
+				<img {{bind-attr src=model.marketing_data.highlight_2}} />
+				{{else}}
+				<img src="//s3.amazonaws.com/clickbuild/images/thumbnail-default-picture.png" />
+				{{/if}}
+				<button {{action 'upload_photo' "2"}} class="thumb-upload-button"><i class="ui cloud upload icon"></i> upload image</button>
+				<div class="thumb-upload">
+					<div class="dropzone" id="dropzone_photo_2"></div>
+					<div class="upload-button needsclick"></div>
+					<div class="upload-instructions"></div>
+				</div>
+			</div>
+		</div>
+
+
+		<div class="column field">
+			<label>Highlight 3</label>
+			<div class="upload-container-thumb marketing-highlight mh-3">
+				{{#if model.marketing_data.highlight_3}}
+				<img {{bind-attr src=model.marketing_data.highlight_3}} />
+				{{else}}
+				<img src="//s3.amazonaws.com/clickbuild/images/thumbnail-default-picture.png" />
+				{{/if}}
+				<button {{action 'upload_photo' "3"}} class="thumb-upload-button"><i class="ui cloud upload icon"></i> upload image</button>
+				<div class="thumb-upload">
+					<div class="dropzone" id="dropzone_photo_3"></div>
+					<div class="upload-button needsclick"></div>
+					<div class="upload-instructions"></div>
+				</div>
+			</div>
+		</div>
+
+
+		<div class="column field">
+			<label>Highlight 4</label>
+			<div class="upload-container-thumb marketing-highlight mh-4">
+				{{#if model.marketing_data.highlight_4}}
+				<img {{bind-attr src=model.marketing_data.highlight_4}} />
+				{{else}}
+				<img src="//s3.amazonaws.com/clickbuild/images/thumbnail-default-picture.png" />
+				{{/if}}
+				<button {{action 'upload_photo' "4"}} class="thumb-upload-button"><i class="ui cloud upload icon"></i> upload image</button>
+				<div class="thumb-upload">
+					<div class="dropzone" id="dropzone_photo_4"></div>
+					<div class="upload-button needsclick"></div>
+					<div class="upload-instructions"></div>
+				</div>
+			</div>
+		</div>
+
+
+		<div class="column field">
+			<label>Highlight 5</label>
+			<div class="upload-container-thumb marketing-highlight mh-5">
+				{{#if model.marketing_data.highlight_5}}
+				<img {{bind-attr src=model.marketing_data.highlight_5}} />
+				{{else}}
+				<img src="//s3.amazonaws.com/clickbuild/images/thumbnail-default-picture.png" />
+				{{/if}}
+				<button {{action 'upload_photo' "5"}} class="thumb-upload-button"><i class="ui cloud upload icon"></i> upload image</button>
+				<div class="thumb-upload">
+					<div class="dropzone" id="dropzone_photo_5"></div>
+					<div class="upload-button needsclick"></div>
+					<div class="upload-instructions"></div>
+				</div>
+			</div>
+		</div>
+
+
+		<div class="column field">
+			<label>Floor Plan / Secondary Image</label>
+			<div class="upload-container-thumb marketing-highlight mh-6">
+				{{#if model.marketing_data.highlight_6}}
+				<img {{bind-attr src=model.marketing_data.highlight_6}} />
+				{{else}}
+				<img src="//s3.amazonaws.com/clickbuild/images/thumbnail-default-picture.png" />
+				{{/if}}
+				<button {{action 'upload_photo' "6"}} class="thumb-upload-button"><i class="ui cloud upload icon"></i> upload image</button>
+				<div class="thumb-upload">
+					<div class="dropzone" id="dropzone_photo_6"></div>
+					<div class="upload-button needsclick"></div>
+					<div class="upload-instructions"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<br /><br /><br />
+
+
+	{{#if model.can_view}}
+		{{input type="hidden" id="project_id" name="project_id" value=model.project_id}}
+		<button id="save" {{action 'save' model.project_id}}>Save Marketing Info</button> &nbsp;&nbsp;&nbsp;
+		<a {{bind-attr href=model.print_url}} target="_blank" class="form-text-link">Print Marketing Flyer</a>
+	{{/if}}
+
+
+	<br /><br /><br />
+
+
+	<div class="ui section divider"></div>
+
+
+	<h3 class="ui header">Craigslist html</h3>
+	<h3><a {{bind-attr href=model.gallery_link_url}} target="_blank" class="form-text-link">Gallery Images</a></h3>
+
+	{{textarea id="cl_html" class="textarea" name="cl_html" style="opacity: 0.6" value=model.craigslist_html}}
+
+
+</form>
+
+
+<form class="upload-temp" style="display: none;"></form>
